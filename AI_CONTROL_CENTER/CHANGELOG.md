@@ -1,0 +1,102 @@
+# Changelog
+
+> Contiene SOLO: file modificati, data, modifica eseguita, esito.
+> Per le motivazioni vedere DECISIONS.md.
+
+---
+
+## [2026-05-05] — Inizializzazione progetto Next.js
+
+| Campo       | Dettaglio                                              |
+|-------------|--------------------------------------------------------|
+| File        | `tutto il progetto`                                    |
+| Modifica    | Creazione progetto con `create-next-app` (TS + Tailwind + App Router) |
+| Eseguita da | Claude                                                 |
+| Esito       | ✅ OK                                                  |
+
+---
+
+## [2026-05-05] — Pagina di benvenuto
+
+| Campo       | Dettaglio                                              |
+|-------------|--------------------------------------------------------|
+| File        | `src/app/page.tsx`                                     |
+| Modifica    | Sostituzione pagina default con welcome page "Gestione Reparti NBA" |
+| Eseguita da | Claude                                                 |
+| Esito       | ✅ OK                                                  |
+
+---
+
+## [2026-05-05] — Deploy su Vercel
+
+| Campo       | Dettaglio                                              |
+|-------------|--------------------------------------------------------|
+| File        | `.vercel/` (generato automaticamente)                  |
+| Modifica    | Primo deploy in produzione su Vercel                   |
+| Eseguita da | Claude (vercel CLI)                                    |
+| Esito       | ✅ OK — https://gestione-reparti-nba.vercel.app        |
+
+---
+
+## [2026-05-05] — Repository GitHub
+
+| Campo       | Dettaglio                                              |
+|-------------|--------------------------------------------------------|
+| File        | Tutto il progetto                                      |
+| Modifica    | Creazione repo pubblico e push branch `main`           |
+| Eseguita da | Claude (gh CLI)                                        |
+| Esito       | ✅ OK — https://github.com/DjWise005/gestione-reparti-nba |
+
+---
+
+## [2026-05-06] — Configurazione Airtable
+
+| Campo       | Dettaglio                                              |
+|-------------|--------------------------------------------------------|
+| File        | `.env.local`                                           |
+| Modifica    | Creazione base Airtable "Gestione Reparti NBA" e tabella "Reparti"; salvataggio token e Base ID in `.env.local` |
+| Eseguita da | Claude (Airtable REST API)                             |
+| Esito       | ✅ OK — Base ID: appFkHbvmtkKi0PYt                     |
+
+---
+
+## [2026-05-11] — Bootstrap Airtable Integration Layer
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File        | `src/types/airtable.ts`                                          |
+| Modifica    | Creazione tipi TypeScript (RepartoFields, AirtableRecord, AirtableResponse, Reparto) |
+| Eseguita da | Claude                                                           |
+| Esito       | ✅ OK                                                             |
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File        | `src/lib/airtable.ts`                                            |
+| Modifica    | Creazione client Airtable server-only con fetch nativo, check 3 env vars, revalidate 60s |
+| Eseguita da | Claude                                                           |
+| Esito       | ✅ OK                                                             |
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File        | `src/app/api/reparti/route.ts`                                   |
+| Modifica    | Creazione route GET /api/reparti con Response.json() (Next.js 16) |
+| Eseguita da | Claude                                                           |
+| Esito       | ✅ OK                                                             |
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File        | `package.json` / `package-lock.json`                             |
+| Modifica    | Installazione `server-only` (1 pacchetto, zero dipendenze transitive) |
+| Eseguita da | Claude (approvato esplicitamente)                                |
+| Esito       | ✅ OK                                                             |
+
+---
+
+## [2026-05-06] — Creazione AI_CONTROL_CENTER
+
+| Campo       | Dettaglio                                              |
+|-------------|--------------------------------------------------------|
+| File        | `AI_CONTROL_CENTER/` (10 file)                         |
+| Modifica    | Creazione cartella di controllo con tutti i file di documentazione |
+| Eseguita da | Claude                                                 |
+| Esito       | ✅ OK                                                  |
