@@ -19,9 +19,10 @@
 
 | Componente              | Stato          | Note                                           |
 |-------------------------|----------------|------------------------------------------------|
-| Next.js App (frontend)  | ✅ Funzionante  | Welcome page deployata su Vercel               |
+| Next.js App (frontend)  | ✅ Funzionante  | Welcome page + pagina /reparti                 |
 | Airtable (database)     | ✅ Collegato    | 6 reparti presenti, API restituisce dati reali |
 | API routes Next.js      | ✅ Attive       | GET /api/reparti — revalidate 60s              |
+| Pagina /reparti         | ✅ Funzionante  | Server Component — test locale OK, prod da fare |
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
 | GitHub↔Vercel auto-deploy | ✅ Attivo     | Ogni push su main triggera deploy automatico   |
 | Vercel env variables    | ✅ Configurate  | Configurate manualmente dall'utente su Vercel  |
@@ -43,15 +44,17 @@ src/
 ├── app/
 │   ├── api/
 │   │   └── reparti/
-│   │       └── route.ts ✅ GET /api/reparti
+│   │       └── route.ts    ✅ GET /api/reparti
+│   ├── reparti/
+│   │   └── page.tsx        ✅ Server Component — tabella reparti da Airtable
 │   ├── favicon.ico
 │   ├── globals.css
-│   ├── layout.tsx        ⚠️ metadata non aggiornati, lang="en"
-│   └── page.tsx          ✅ welcome page personalizzata
+│   ├── layout.tsx          ⚠️ metadata non aggiornati, lang="en"
+│   └── page.tsx            ✅ welcome page + CTA → /reparti
 ├── lib/
-│   └── airtable.ts       ✅ client server-only
+│   └── airtable.ts         ✅ client server-only
 └── types/
-    └── airtable.ts       ✅ tipi TypeScript
+    └── airtable.ts         ✅ tipi TypeScript
 ```
 **Assenti:** `components/`
 
@@ -67,5 +70,6 @@ src/
 ---
 
 ## Prossimi step (da NEXT_STEPS.md)
-1. Aggiornare metadata in `layout.tsx`
-2. UI visualizzazione Reparti (pagina /reparti)
+1. Test produzione /reparti (T-11) — dopo commit + push
+2. Miglioramento UI /reparti (grafica accettata provvisoriamente)
+3. Aggiornare metadata in `layout.tsx`

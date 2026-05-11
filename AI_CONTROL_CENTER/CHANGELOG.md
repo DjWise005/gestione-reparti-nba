@@ -114,6 +114,24 @@
 
 ---
 
+## [2026-05-11] — Pagina /reparti — Server Component
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File        | `src/app/reparti/page.tsx`                                       |
+| Modifica    | Creazione pagina /reparti come Server Component: chiama `getReparti()` direttamente, tabella reparti con badge stato colorati, gestione errore con try/catch, link ← Home |
+| Eseguita da | Claude                                                           |
+| Esito       | ✅ OK — verificata localmente nel browser (6 reparti visualizzati) |
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File        | `src/app/page.tsx`                                               |
+| Modifica    | Sostituzione `<button>` CTA con `<Link href="/reparti">` (aggiunto `import Link`) |
+| Eseguita da | Claude                                                           |
+| Esito       | ✅ OK — navigazione Home → /reparti verificata localmente         |
+
+---
+
 ## [2026-05-06] — Creazione AI_CONTROL_CENTER
 
 | Campo       | Dettaglio                                              |

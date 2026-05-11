@@ -2,6 +2,28 @@
 
 ---
 
+## [TEST-009] — T-10: Navigazione Home → /reparti (locale)
+- **Data:** 2026-05-11
+- **Ambiente:** Locale (http://localhost:3000)
+- **Cosa è stato testato:** Click sul CTA "Accedi alla piattaforma →" dalla Home — verifica che `<Link href="/reparti">` navighi correttamente alla pagina /reparti
+- **Esito:** ✅ Passato
+- **Errore rilevato:** Nessuno
+- **Fix applicato:** —
+- **Risultato dopo fix:** Navigazione Home → /reparti funzionante; link ← Home sulla pagina /reparti funzionante
+
+---
+
+## [TEST-010] — T-08: Pagina /reparti — rendering dati (locale)
+- **Data:** 2026-05-11
+- **Ambiente:** Locale (http://localhost:3000/reparti)
+- **Cosa è stato testato:** Rendering pagina /reparti come Server Component — visualizzazione tabella con 6 reparti da Airtable, badge stato colorati, contatore "6 totali"
+- **Esito:** ✅ Passato
+- **Errore rilevato:** Nessuno
+- **Fix applicato:** —
+- **Risultato dopo fix:** 6 reparti visualizzati (Amministrazione, Carrozzeria, Logistica, Officina, Preparazione, Vendite); grafica accettata provvisoriamente dall'utente
+
+---
+
 ## [TEST-001] — Verifica server di sviluppo locale
 - **Data:** 2026-05-05
 - **Ambiente:** Locale (http://localhost:3000)

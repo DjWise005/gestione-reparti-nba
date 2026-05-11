@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center px-4">
@@ -48,9 +50,9 @@ export default function Home() {
         </div>
 
         {/* CTA */}
-        <button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg shadow-blue-500/25 transition-all hover:scale-105 active:scale-95">
+        <Link href="/reparti" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg shadow-blue-500/25 transition-all hover:scale-105 active:scale-95">
           Accedi alla piattaforma →
-        </button>
+        </Link>
 
         {/* Footer */}
         <p className="text-slate-600 text-xs mt-12 tracking-wider uppercase">
