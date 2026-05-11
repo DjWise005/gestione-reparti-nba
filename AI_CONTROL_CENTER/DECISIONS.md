@@ -32,6 +32,20 @@
 
 ---
 
+## [DEC-005] — Autenticazione: nessuna auth nella fase MVP
+- **Data:** 2026-05-12
+- **Contesto:** Checkpoint architetturale post-Application Shell MVP
+- **Decisione presa:** Nessuna autenticazione nella fase corrente (MVP strutturale). Auth rimandata a una fase dedicata successiva.
+- **Motivazione:** Siamo ancora in fase MVP — shell, routing e componenti base non sono ancora consolidati. Aggiungere auth ora introdurrebbe complessità architetturale prematura senza valore operativo immediato.
+- **Alternative scartate:**
+  - NextAuth/Auth.js → rimandato a fase dedicata
+  - Middleware con token manuale → rimandato a fase dedicata
+- **Impatto:** Le route sotto `(app)/` sono attualmente accessibili senza login. Accettato consapevolmente per la fase MVP.
+- **Impatto futuro previsto:** Quando verrà progettata la fase auth, richiederà: middleware Next.js, provider auth, gestione sessioni, protezione route `(app)/`
+- **Approvata da:** Utente (2026-05-12)
+
+---
+
 ## [DEC-004] — Libreria UI: shadcn/ui
 - **Data:** 2026-05-11
 - **Contesto:** Fase Frontend MVP — Application Shell. Necessità di componenti UI accessibili e coerenti per sidebar, topbar, navigazione mobile, dashboard.

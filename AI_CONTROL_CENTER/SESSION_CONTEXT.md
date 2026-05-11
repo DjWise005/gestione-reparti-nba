@@ -42,27 +42,26 @@
 | Refactor /reparti con PageContainer               | ✅ Completato  | `33398ff`  |
 | /impostazioni placeholder creata                  | ✅ Completato  | `df0f17d`  |
 | Test visivo shell in produzione                   | ✅ Completato  | —          |
-| Aggiornamento CTA landing → /dashboard            | 🔲 Da fare    | —          |
-| Test produzione post-CTA                          | 🔲 Da fare    | —          |
-| Prima feature reale (checkpoint)                  | 🔲 Da fare    | —          |
+| Aggiornamento CTA landing → /dashboard            | ✅ Completato  | `5c79cdf`  |
+| Test produzione post-CTA                          | ✅ Completato  | —          |
+| Checkpoint architetturale (DEC-005 auth)          | ✅ Completato  | —          |
 
 ## Approvazioni ricevute
 - DEC-004 shadcn/ui approvato (2026-05-11)
 - Application Shell completa approvata step-by-step (2026-05-11)
 
 ## Blocchi / In attesa
-- Aggiornare CTA landing page da `/reparti` a `/dashboard`
-- Test produzione dopo CTA update
-- Checkpoint prima di iniziare prima feature reale
+- Prima feature reale: da concordare (checkpoint completato — DEC-005 registrata)
 
 ## Rischi residui
-- Landing page CTA punta ancora a `/reparti` (non a `/dashboard`)
 - Dashboard e Impostazioni sono placeholder senza dati reali
+- Route `(app)/` accessibili senza login (accettato — DEC-005)
 
-## Milestone completata
+## Milestone completate
 - ✅ **Application Shell MVP** — Sidebar + Topbar + MobileNav + routing completo
 - ✅ Routing MVP: `/dashboard` · `/reparti` · `/impostazioni`
 - ✅ Test produzione: shell verificata, dati Airtable OK
+- ✅ Checkpoint architetturale: auth rimandata consapevolmente (DEC-005)
 
 ## Versione corrente
 - v0.2.0 STABLE — Application Shell MVP completata e verificata in produzione
