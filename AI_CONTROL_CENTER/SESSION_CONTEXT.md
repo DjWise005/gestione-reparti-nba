@@ -49,17 +49,22 @@
 | Pagina /reparti/[id] creata                       | ✅ Completato  | `142de64`  |
 | Righe lista /reparti rese cliccabili              | ✅ Completato  | `81970fd`  |
 | Back button su /reparti/[id]                      | ✅ Completato  | `7824575`  |
+| Service layer reparti.service.ts creato           | ✅ Completato  | `add52e4`  |
+| Refactor pages → service (Step 3+4)               | ✅ Completato  | `ec06f74`  |
+| Dashboard dati reali (Step 5)                     | ✅ Completato  | `ea8facf`  |
+| Test produzione service layer + dashboard         | ✅ Completato  | —          |
 
 ## Approvazioni ricevute
 - DEC-004 shadcn/ui approvato (2026-05-11)
 - Application Shell completa approvata step-by-step (2026-05-11)
 - Feature dettaglio reparto /reparti/[id] approvata e completata (2026-05-12)
+- Service layer + dashboard dati reali approvati e completati (2026-05-12)
 
 ## Blocchi / In attesa
-- Prossima feature: da concordare
+- Popolamento dati Airtable (Stato, Budget, N° Dipendenti) — azione manuale utente
 
 ## Rischi residui
-- Dashboard e Impostazioni sono placeholder senza dati reali
+- Campi Airtable vuoti: Stato, Budget, N° Dipendenti — dashboard mostra zeri (non bloccante)
 - Route `(app)/` accessibili senza login (accettato — DEC-005)
 
 ## Milestone completate
@@ -68,6 +73,8 @@
 - ✅ Test produzione: shell verificata, dati Airtable OK
 - ✅ Checkpoint architetturale: auth rimandata consapevolmente (DEC-005)
 - ✅ **Feature dettaglio reparto** — `/reparti/[id]` con dati reali + lista cliccabile + back button
+- ✅ **Service layer** — `reparti.service.ts` attivo, pages disaccoppiate da Airtable client
+- ✅ **Dashboard dati reali** — statistiche aggregate da Airtable via service, test produzione OK
 
 ## Versione corrente
-- v0.3.0 — Feature dettaglio reparto completata
+- v0.4.0 — Service layer + Dashboard dati reali

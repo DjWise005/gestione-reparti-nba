@@ -181,6 +181,19 @@
 
 ---
 
+## [2026-05-12] — Service layer + Dashboard dati reali
+
+| Campo       | Dettaglio                                                                    |
+|-------------|------------------------------------------------------------------------------|
+| File creati | `src/services/reparti.service.ts`                                            |
+| File modificati | `src/types/airtable.ts`, `src/app/(app)/reparti/page.tsx`, `src/app/(app)/reparti/[id]/page.tsx`, `src/app/(app)/dashboard/page.tsx` |
+| Modifica    | Creazione service layer con `getRepartiList()`, `getRepartoDetail()`, `getRepartiStats()`; aggiunta interface `RepartiStats`; refactor pages per usare service; dashboard con 7 card statistiche aggregate da Airtable |
+| Commit chiave | `add52e4` service layer · `ec06f74` refactor pages · `ea8facf` dashboard  |
+| Eseguita da | Claude (approvazione step-by-step)                                           |
+| Esito       | ✅ Build pulita — test produzione OK — anomalia: campi Airtable vuoti (non bloccante) |
+
+---
+
 ## [2026-05-12] — Back button su /reparti/[id]
 
 | Campo       | Dettaglio                                                                    |

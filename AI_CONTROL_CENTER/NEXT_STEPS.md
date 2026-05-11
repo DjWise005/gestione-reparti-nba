@@ -1,11 +1,11 @@
 # Next Steps
 
 ## Priorità alta
-- [ ] Introdurre service layer: `src/services/reparti.service.ts` (piano approvato — da implementare)
-- [ ] Dashboard con dati reali — dopo service layer
+- [ ] Popolare dati Airtable: compilare Stato, Budget (€), N° Dipendenti per tutti i reparti (ANO-001)
 
 ## Priorità media
-- [ ] Test produzione back button /reparti/[id]
+- [ ] Decidere prossima feature di sviluppo (da concordare con utente)
+- [ ] Autenticazione (PND-003 — rimandato a fase dedicata)
 
 ## Backlog
 - [ ] Autenticazione (PND-003 — rimandato a fase dedicata)

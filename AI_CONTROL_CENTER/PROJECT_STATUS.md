@@ -6,11 +6,11 @@
 ---
 
 ## Stato generale
-- **Versione:** v0.3.0
+- **Versione:** v0.4.0
 - **Stato:** STABLE
 - **Ultimo aggiornamento:** 2026-05-12
 - **Deploy attivo:** https://gestione-reparti-nba.vercel.app
-- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 21 commit)
+- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 25 commit)
 - **Auto-deploy:** ✅ Attivo — ogni push su `main` triggera deploy Vercel automatico
 
 ---
@@ -25,7 +25,7 @@
 | API routes Next.js      | ✅ Attive       | GET /api/reparti — revalidate 60s              |
 | Pagina /reparti         | ✅ Funzionante  | Server Component — tabella cliccabile          |
 | Pagina /reparti/[id]    | ✅ Funzionante  | Server Component — dettaglio con dati reali    |
-| Pagina /dashboard       | 🟡 Placeholder  | Struttura presente, nessun dato reale          |
+| Pagina /dashboard       | ✅ Funzionante  | 7 statistiche aggregate da Airtable via service |
 | Pagina /impostazioni    | 🟡 Placeholder  | Struttura presente, configurazione da fare     |
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
 | GitHub↔Vercel auto-deploy | ✅ Attivo     | Ogni push su main triggera deploy automatico   |
@@ -61,7 +61,7 @@ src/
 ├── app/
 │   ├── (app)/
 │   │   ├── dashboard/
-│   │   │   └── page.tsx        🟡 placeholder
+│   │   │   └── page.tsx        ✅ statistiche reali via getRepartiStats()
 │   │   ├── impostazioni/
 │   │   │   └── page.tsx        🟡 placeholder
 │   │   ├── reparti/
@@ -85,8 +85,10 @@ src/
 │   │   └── PageContainer.tsx   ✅ PageContainer + PageHeader
 │   └── ui/
 │       └── button.tsx          ✅ shadcn Button (base-nova)
+├── services/
+│   └── reparti.service.ts      ✅ service layer — getRepartiList/Detail/Stats
 ├── lib/
-│   ├── airtable.ts             ✅ client server-only
+│   ├── airtable.ts             ✅ client server-only (accesso solo via service)
 │   └── utils.ts                ✅ cn() helper (clsx + tailwind-merge)
 └── types/
     └── airtable.ts             ✅ tipi TypeScript
@@ -104,7 +106,12 @@ src/
 
 ---
 
+## Anomalie note
+| ID     | Descrizione                                                    | Priorità  |
+|--------|----------------------------------------------------------------|-----------|
+| ANO-001 | Campi Airtable vuoti: Stato, Budget, N° Dipendenti — dashboard mostra zeri | 🟡 Non bloccante |
+
 ## Prossimi step (da NEXT_STEPS.md)
-1. Test produzione feature dettaglio reparto
-2. Definire prossima feature (dashboard dati reali? back button su [id]? altro?)
+1. Popolare dati Airtable (Stato, Budget, N° Dipendenti) — azione manuale utente
+2. Pianificare prossima feature di sviluppo
 3. Pianificare autenticazione (PND-003)
