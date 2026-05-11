@@ -24,6 +24,18 @@ export interface AirtableResponse<T> {
   offset?: string;
 }
 
+// Aggregazioni calcolate server-side dal service layer
+export interface RepartiStats {
+  totale: number;
+  attivi: number;
+  inattivi: number;
+  inRistrutturazione: number;
+  budgetTotale: number;
+  budgetMedio: number;
+  mediaDipendenti: number;
+  repartoConPiuDipendenti: { nome: string; numDipendenti: number } | null;
+}
+
 // Tipo normalizzato usato nell'app (camelCase, disaccoppiato dai nomi Airtable)
 export interface Reparto {
   id: string;
