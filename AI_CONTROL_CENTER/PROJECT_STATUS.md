@@ -26,7 +26,7 @@
 | Pagina /reparti         | ✅ Funzionante  | Server Component — tabella cliccabile          |
 | Pagina /reparti/[id]    | ✅ Funzionante  | Server Component — dettaglio con dati reali    |
 | Pagina /dashboard       | ✅ Funzionante  | 7 statistiche aggregate da Airtable via service |
-| Pagina /impostazioni    | 🟡 Placeholder  | Struttura presente, configurazione da fare     |
+| Pagina /impostazioni    | ✅ Funzionante  | Info sistema reali: versione, ambiente, stato, ANO-001 |
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
 | GitHub↔Vercel auto-deploy | ✅ Attivo     | Ogni push su main triggera deploy automatico   |
 | Vercel env variables    | ✅ Configurate  | Configurate manualmente dall'utente su Vercel  |

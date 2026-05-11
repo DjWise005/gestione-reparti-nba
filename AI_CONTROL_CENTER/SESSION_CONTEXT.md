@@ -53,6 +53,9 @@
 | Refactor pages → service (Step 3+4)               | ✅ Completato  | `ec06f74`  |
 | Dashboard dati reali (Step 5)                     | ✅ Completato  | `ea8facf`  |
 | Test produzione service layer + dashboard         | ✅ Completato  | —          |
+| Error handling dashboard                          | ✅ Completato  | `ab5408d`  |
+| /impostazioni con contenuto reale                 | ✅ Completato  | `ed395cf`  |
+| Test produzione /impostazioni                     | ✅ Completato  | —          |
 
 ## Approvazioni ricevute
 - DEC-004 shadcn/ui approvato (2026-05-11)
@@ -75,6 +78,7 @@
 - ✅ **Feature dettaglio reparto** — `/reparti/[id]` con dati reali + lista cliccabile + back button
 - ✅ **Service layer** — `reparti.service.ts` attivo, pages disaccoppiate da Airtable client
 - ✅ **Dashboard dati reali** — statistiche aggregate da Airtable via service, test produzione OK
+- ✅ **Impostazioni** — info sistema reali, test produzione OK — nessun placeholder rimasto
 
 ## Versione corrente
-- v0.4.0 — Service layer + Dashboard dati reali
+- v0.4.0 — Tutte le route (app) con contenuto reale

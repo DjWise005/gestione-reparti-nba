@@ -181,6 +181,18 @@
 
 ---
 
+## [2026-05-12] — Pagina /impostazioni con contenuto reale
+
+| Campo       | Dettaglio                                                                    |
+|-------------|------------------------------------------------------------------------------|
+| File modificati | `src/app/(app)/impostazioni/page.tsx`                                    |
+| Modifica    | Sostituito placeholder con 4 sezioni informative: Applicazione (v0.4.0, ambiente), Infrastruttura, Sicurezza, Note operative (ANO-001) |
+| Commit      | `ed395cf`                                                                    |
+| Eseguita da | Claude (approvazione utente)                                                 |
+| Esito       | ✅ Build pulita — test produzione OK (7/7 test passati)                      |
+
+---
+
 ## [2026-05-12] — Service layer + Dashboard dati reali
 
 | Campo       | Dettaglio                                                                    |
