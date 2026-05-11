@@ -181,6 +181,19 @@
 
 ---
 
+## [2026-05-12] — Feature: dettaglio reparto /reparti/[id]
+
+| Campo       | Dettaglio                                                                    |
+|-------------|------------------------------------------------------------------------------|
+| File modificati | `src/lib/airtable.ts`, `src/app/(app)/reparti/page.tsx`              |
+| File creati | `src/app/(app)/reparti/[id]/page.tsx`                                        |
+| Modifica    | Aggiunta `getRepartoById(id)` al client Airtable; creazione pagina dettaglio Server Component con badge stato + campi filtrati; righe della lista rese cliccabili via `<Link block>` su ogni cella (no "use client") |
+| Commit chiave | `142de64` getRepartoById + pagina [id] · `81970fd` lista cliccabile      |
+| Eseguita da | Claude (approvazione step-by-step)                                           |
+| Esito       | ✅ Build TypeScript pulita — navigazione lista → dettaglio funzionante       |
+
+---
+
 ## [2026-05-06] — Creazione AI_CONTROL_CENTER
 
 | Campo       | Dettaglio                                              |

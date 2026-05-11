@@ -6,11 +6,11 @@
 ---
 
 ## Stato generale
-- **Versione:** v0.2.0
+- **Versione:** v0.3.0
 - **Stato:** STABLE
-- **Ultimo aggiornamento:** 2026-05-11
+- **Ultimo aggiornamento:** 2026-05-12
 - **Deploy attivo:** https://gestione-reparti-nba.vercel.app
-- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 18 commit)
+- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 21 commit)
 - **Auto-deploy:** ✅ Attivo — ogni push su `main` triggera deploy Vercel automatico
 
 ---
@@ -23,7 +23,8 @@
 | Application Shell       | ✅ Completata   | Sidebar + Topbar + MobileNav — test locale ✅  |
 | Airtable (database)     | ✅ Collegato    | 6 reparti presenti, API restituisce dati reali |
 | API routes Next.js      | ✅ Attive       | GET /api/reparti — revalidate 60s              |
-| Pagina /reparti         | ✅ Funzionante  | Server Component — layout custom (da refactor) |
+| Pagina /reparti         | ✅ Funzionante  | Server Component — tabella cliccabile          |
+| Pagina /reparti/[id]    | ✅ Funzionante  | Server Component — dettaglio con dati reali    |
 | Pagina /dashboard       | 🟡 Placeholder  | Struttura presente, nessun dato reale          |
 | Pagina /impostazioni    | 🟡 Placeholder  | Struttura presente, configurazione da fare     |
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
@@ -64,7 +65,9 @@ src/
 │   │   ├── impostazioni/
 │   │   │   └── page.tsx        🟡 placeholder
 │   │   ├── reparti/
-│   │   │   └── page.tsx        ✅ Server Component — tabella Airtable
+│   │   │   ├── [id]/
+│   │   │   │   └── page.tsx    ✅ Server Component — dettaglio reparto
+│   │   │   └── page.tsx        ✅ Server Component — lista cliccabile
 │   │   └── layout.tsx          ✅ shell: Sidebar + Topbar + MobileNav
 │   ├── api/
 │   │   └── reparti/
@@ -102,7 +105,6 @@ src/
 ---
 
 ## Prossimi step (da NEXT_STEPS.md)
-1. Aggiornare CTA landing page (`src/app/page.tsx`) da `/reparti` a `/dashboard`
-2. Test produzione post-CTA
-3. Checkpoint — prima feature reale solo dopo validazione completa
-4. Miglioramento UI /reparti (grafica accettata provvisoriamente)
+1. Test produzione feature dettaglio reparto
+2. Definire prossima feature (dashboard dati reali? back button su [id]? altro?)
+3. Pianificare autenticazione (PND-003)

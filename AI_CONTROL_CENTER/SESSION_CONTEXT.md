@@ -45,13 +45,17 @@
 | Aggiornamento CTA landing → /dashboard            | ✅ Completato  | `5c79cdf`  |
 | Test produzione post-CTA                          | ✅ Completato  | —          |
 | Checkpoint architetturale (DEC-005 auth)          | ✅ Completato  | —          |
+| getRepartoById() aggiunto a airtable.ts           | ✅ Completato  | `142de64`  |
+| Pagina /reparti/[id] creata                       | ✅ Completato  | `142de64`  |
+| Righe lista /reparti rese cliccabili              | ✅ Completato  | `81970fd`  |
 
 ## Approvazioni ricevute
 - DEC-004 shadcn/ui approvato (2026-05-11)
 - Application Shell completa approvata step-by-step (2026-05-11)
+- Feature dettaglio reparto /reparti/[id] approvata e completata (2026-05-12)
 
 ## Blocchi / In attesa
-- Prima feature reale: da concordare (checkpoint completato — DEC-005 registrata)
+- Prossima feature: da concordare
 
 ## Rischi residui
 - Dashboard e Impostazioni sono placeholder senza dati reali
@@ -62,6 +66,7 @@
 - ✅ Routing MVP: `/dashboard` · `/reparti` · `/impostazioni`
 - ✅ Test produzione: shell verificata, dati Airtable OK
 - ✅ Checkpoint architetturale: auth rimandata consapevolmente (DEC-005)
+- ✅ **Feature dettaglio reparto** — `/reparti/[id]` con dati reali + lista cliccabile
 
 ## Versione corrente
-- v0.2.0 STABLE — Application Shell MVP completata e verificata in produzione
+- v0.3.0 — Feature dettaglio reparto completata

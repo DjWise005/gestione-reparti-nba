@@ -1,19 +1,18 @@
 # Next Steps
 
 ## Priorità alta
-- [ ] Aggiungere `AIRTABLE_TOKEN` e `AIRTABLE_BASE_ID` come variabili d'ambiente su Vercel (ISS-003)
-- [ ] Decidere e approvare integrazione Airtable nel codice Next.js (PND-001)
+- [ ] Test produzione: verificare navigazione /reparti → /reparti/[id] su Vercel
+- [ ] Decidere prossima feature (da concordare con utente)
 
 ## Priorità media
-- [ ] Collegare GitHub Login Connection su Vercel per deploy automatici (ISS-001 / PND-002)
-- [ ] Creare route API `/api/reparti` per lettura dati da Airtable
-- [ ] Visualizzare lista Reparti nella pagina principale
+- [ ] Back button / breadcrumb su pagina /reparti/[id]
+- [ ] Dashboard con dati reali (statistiche: budget totale, media dipendenti, ecc.)
 
 ## Backlog
-- [ ] Aggiungere autenticazione utenti (es. NextAuth)
+- [ ] Autenticazione (PND-003 — rimandato a fase dedicata)
 - [ ] Creare tabella Dipendenti in Airtable e collegarla a Reparti
-- [ ] Aggiungere dashboard con statistiche (N° dipendenti per reparto, budget totale)
 - [ ] Gestione turni / calendario
+- [ ] Pagina /impostazioni con contenuto reale
 
 ---
-_Ultimo aggiornamento: 2026-05-06_
+_Ultimo aggiornamento: 2026-05-12_
