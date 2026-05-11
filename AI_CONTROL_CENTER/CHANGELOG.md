@@ -126,6 +126,19 @@
 
 ---
 
+## [2026-05-11] — Application Shell MVP completata
+
+| Campo       | Dettaglio                                                                    |
+|-------------|------------------------------------------------------------------------------|
+| File creati | `(app)/layout.tsx`, `(app)/dashboard/page.tsx`, `components/layout/Sidebar.tsx`, `components/layout/Topbar.tsx`, `components/layout/MobileNav.tsx`, `components/shared/PageContainer.tsx` |
+| File modificati | `src/app/layout.tsx` (lang, metadata, font), `src/app/(app)/reparti/page.tsx` (spostata), `package.json` (+shadcn) |
+| Modifica    | Installazione shadcn/ui v4 (DEC-004); route group `(app)` con layout shell; Sidebar desktop; Topbar con titolo dinamico; MobileNav bottom bar; PageContainer/PageHeader; dashboard placeholder |
+| Commit chiave | `e756ac2` shadcn · `d2a271f` route group · `194c28e` Sidebar · `62051af` Topbar · `78b753e` MobileNav · `477659c` PageContainer · `5801b68` shell completa |
+| Eseguita da | Claude (approvazione step-by-step dell'utente)                               |
+| Esito       | ✅ Build TypeScript pulita — test locale OK — test produzione da eseguire    |
+
+---
+
 ## [2026-05-11] — v0.2.0 — Test produzione /reparti (T-11)
 
 | Campo       | Dettaglio                                                        |
