@@ -8,7 +8,8 @@
 - `src/app/layout.tsx` (modificato — lang="it", metadata, font variable)
 - `src/app/(app)/layout.tsx` (creato — shell: Sidebar + Topbar + MobileNav)
 - `src/app/(app)/dashboard/page.tsx` (creato — placeholder)
-- `src/app/(app)/reparti/page.tsx` (spostato da `src/app/reparti/`)
+- `src/app/(app)/reparti/page.tsx` (spostato + refactor PageContainer)
+- `src/app/(app)/impostazioni/page.tsx` (creato — placeholder)
 - `src/components/layout/Sidebar.tsx` (creato)
 - `src/components/layout/Topbar.tsx` (creato)
 - `src/components/layout/MobileNav.tsx` (creato)
@@ -37,22 +38,31 @@
 | PageContainer + PageHeader creati                 | ✅ Completato  | `477659c`  |
 | MobileNav creata                                  | ✅ Completato  | `78b753e`  |
 | MobileNav collegata al layout                     | ✅ Completato  | `5801b68`  |
-| Refactor /dashboard con PageContainer             | 🔲 Da fare    | —          |
-| Refactor /reparti con PageContainer               | 🔲 Da fare    | —          |
-| Test visivo shell in produzione                   | 🔲 Da fare    | —          |
+| Refactor /dashboard con PageContainer             | ✅ Completato  | `91218db`  |
+| Refactor /reparti con PageContainer               | ✅ Completato  | `33398ff`  |
+| /impostazioni placeholder creata                  | ✅ Completato  | `df0f17d`  |
+| Test visivo shell in produzione                   | ✅ Completato  | —          |
+| Aggiornamento CTA landing → /dashboard            | 🔲 Da fare    | —          |
+| Test produzione post-CTA                          | 🔲 Da fare    | —          |
+| Prima feature reale (checkpoint)                  | 🔲 Da fare    | —          |
 
 ## Approvazioni ricevute
 - DEC-004 shadcn/ui approvato (2026-05-11)
 - Application Shell completa approvata step-by-step (2026-05-11)
 
 ## Blocchi / In attesa
-- Refactor `/dashboard` e `/reparti` per usare `PageContainer` + `PageHeader`
-- Test visivo produzione shell dopo push corrente
+- Aggiornare CTA landing page da `/reparti` a `/dashboard`
+- Test produzione dopo CTA update
+- Checkpoint prima di iniziare prima feature reale
 
 ## Rischi residui
-- Sidebar visibile su desktop ma non ancora testata in produzione
-- `/reparti` usa ancora layout custom (non PageContainer)
-- Dashboard è placeholder vuoto — nessun dato reale
+- Landing page CTA punta ancora a `/reparti` (non a `/dashboard`)
+- Dashboard e Impostazioni sono placeholder senza dati reali
+
+## Milestone completata
+- ✅ **Application Shell MVP** — Sidebar + Topbar + MobileNav + routing completo
+- ✅ Routing MVP: `/dashboard` · `/reparti` · `/impostazioni`
+- ✅ Test produzione: shell verificata, dati Airtable OK
 
 ## Versione corrente
-- v0.2.0 STABLE — Application Shell MVP completata localmente
+- v0.2.0 STABLE — Application Shell MVP completata e verificata in produzione

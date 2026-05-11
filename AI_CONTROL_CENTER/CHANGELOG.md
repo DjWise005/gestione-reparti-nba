@@ -126,6 +126,19 @@
 
 ---
 
+## [2026-05-11] — Routing MVP completo + Refactor PageContainer
+
+| Campo       | Dettaglio                                                                    |
+|-------------|------------------------------------------------------------------------------|
+| File creati | `src/app/(app)/impostazioni/page.tsx`                                        |
+| File modificati | `src/app/(app)/dashboard/page.tsx`, `src/app/(app)/reparti/page.tsx`     |
+| Modifica    | Refactor dashboard e reparti con PageContainer/PageHeader; aggiunta route /impostazioni; routing MVP completato (/dashboard · /reparti · /impostazioni); test produzione shell OK |
+| Commit chiave | `91218db` dashboard refactor · `33398ff` reparti refactor · `df0f17d` impostazioni |
+| Eseguita da | Claude (approvazione step-by-step)                                           |
+| Esito       | ✅ Application Shell MVP completa e verificata in produzione                 |
+
+---
+
 ## [2026-05-11] — Application Shell MVP completata
 
 | Campo       | Dettaglio                                                                    |

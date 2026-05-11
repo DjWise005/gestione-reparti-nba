@@ -10,7 +10,7 @@
 - **Stato:** STABLE
 - **Ultimo aggiornamento:** 2026-05-11
 - **Deploy attivo:** https://gestione-reparti-nba.vercel.app
-- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 14 commit)
+- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 18 commit)
 - **Auto-deploy:** ✅ Attivo — ogni push su `main` triggera deploy Vercel automatico
 
 ---
@@ -25,6 +25,7 @@
 | API routes Next.js      | ✅ Attive       | GET /api/reparti — revalidate 60s              |
 | Pagina /reparti         | ✅ Funzionante  | Server Component — layout custom (da refactor) |
 | Pagina /dashboard       | 🟡 Placeholder  | Struttura presente, nessun dato reale          |
+| Pagina /impostazioni    | 🟡 Placeholder  | Struttura presente, configurazione da fare     |
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
 | GitHub↔Vercel auto-deploy | ✅ Attivo     | Ogni push su main triggera deploy automatico   |
 | Vercel env variables    | ✅ Configurate  | Configurate manualmente dall'utente su Vercel  |
@@ -59,6 +60,8 @@ src/
 ├── app/
 │   ├── (app)/
 │   │   ├── dashboard/
+│   │   │   └── page.tsx        🟡 placeholder
+│   │   ├── impostazioni/
 │   │   │   └── page.tsx        🟡 placeholder
 │   │   ├── reparti/
 │   │   │   └── page.tsx        ✅ Server Component — tabella Airtable
@@ -99,8 +102,7 @@ src/
 ---
 
 ## Prossimi step (da NEXT_STEPS.md)
-1. Refactor `/dashboard` — adottare `PageContainer` + `PageHeader`
-2. Refactor `/reparti` — adottare `PageContainer` + `PageHeader`
-3. Test visivo shell in produzione dopo prossimo push
-4. Pagina `/impostazioni` placeholder
-5. Miglioramento UI /reparti (grafica accettata provvisoriamente)
+1. Aggiornare CTA landing page (`src/app/page.tsx`) da `/reparti` a `/dashboard`
+2. Test produzione post-CTA
+3. Checkpoint — prima feature reale solo dopo validazione completa
+4. Miglioramento UI /reparti (grafica accettata provvisoriamente)
