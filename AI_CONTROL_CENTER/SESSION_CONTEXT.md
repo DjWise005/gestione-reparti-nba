@@ -2,7 +2,7 @@
 
 ## Sessione attiva
 - **Data:** 2026-05-11
-- **Obiettivo sessione:** Pagina /reparti — visualizzazione dati Airtable lato server
+- **Obiettivo sessione:** Frontend MVP — Application Shell
 
 ## File coinvolti
 - `src/app/reparti/page.tsx` (creato)

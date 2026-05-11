@@ -38,6 +38,19 @@
 
 ---
 
+## Dipendenze aggiuntive (post shadcn/ui)
+| Pacchetto               | Versione  | Motivo              |
+|-------------------------|-----------|---------------------|
+| `shadcn`                | ^4.7.0    | CLI shadcn (runtime)|
+| `@base-ui/react`        | ^1.4.1    | Headless UI (base-nova preset) |
+| `clsx`                  | ^2.1.1    | Utility classi CSS  |
+| `tailwind-merge`        | ^3.6.0    | Merge classi Tailwind |
+| `class-variance-authority` | ^0.7.1 | Varianti componenti |
+| `lucide-react`          | ^1.14.0   | Icone               |
+| `tw-animate-css`        | ^1.4.0    | Animazioni CSS      |
+
+---
+
 ## Struttura src/ attuale
 ```
 src/
@@ -48,15 +61,19 @@ src/
 │   ├── reparti/
 │   │   └── page.tsx        ✅ Server Component — tabella reparti da Airtable
 │   ├── favicon.ico
-│   ├── globals.css
+│   ├── globals.css         ✅ aggiornato con tema shadcn (oklch vars)
 │   ├── layout.tsx          ⚠️ metadata non aggiornati, lang="en"
 │   └── page.tsx            ✅ welcome page + CTA → /reparti
+├── components/
+│   └── ui/
+│       └── button.tsx      ✅ shadcn Button (base-nova)
 ├── lib/
-│   └── airtable.ts         ✅ client server-only
+│   ├── airtable.ts         ✅ client server-only
+│   └── utils.ts            ✅ cn() helper (clsx + tailwind-merge)
 └── types/
     └── airtable.ts         ✅ tipi TypeScript
 ```
-**Assenti:** `components/`
+**Radice:** `components.json` (configurazione shadcn)
 
 ---
 

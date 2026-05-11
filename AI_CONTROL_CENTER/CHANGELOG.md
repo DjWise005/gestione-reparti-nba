@@ -114,6 +114,18 @@
 
 ---
 
+## [2026-05-11] — Installazione shadcn/ui v4 (DEC-004)
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File creati | `components.json`, `src/lib/utils.ts`, `src/components/ui/button.tsx` |
+| File modificati | `package.json`, `package-lock.json`, `src/app/globals.css`  |
+| Modifica    | Installazione shadcn/ui v4.7.0 con preset `base-nova`; aggiunta dipendenze: `@base-ui/react`, `clsx`, `tailwind-merge`, `class-variance-authority`, `lucide-react`, `tw-animate-css` |
+| Eseguita da | Claude (approvata con DEC-004)                                   |
+| Esito       | ✅ OK — build TypeScript pulita dopo installazione               |
+
+---
+
 ## [2026-05-11] — v0.2.0 — Test produzione /reparti (T-11)
 
 | Campo       | Dettaglio                                                        |

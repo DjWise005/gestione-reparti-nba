@@ -10,6 +10,7 @@
 | Framework   | Next.js (App Router) | 16.x     |
 | Language    | TypeScript           | 5.x      |
 | Styling     | Tailwind CSS         | v4       |
+| UI Library  | shadcn/ui            | latest (DEC-004) |
 | Database    | Airtable (REST API)  | —        |
 | Deploy      | Vercel               | —        |
 | Runtime     | Node.js              | LTS      |
@@ -56,7 +57,8 @@ src/
 ### Styling
 - Usare esclusivamente classi Tailwind CSS v4
 - Nessun file CSS aggiuntivo oltre `globals.css` salvo casi eccezionali approvati
-- Nessuna libreria UI esterna (es. shadcn, MUI, Chakra) senza approvazione
+- **shadcn/ui è approvato (DEC-004)** — altri framework UI (MUI, Chakra, etc.) richiedono nuova approvazione
+- I componenti shadcn vanno in `src/components/ui/` e si aggiornano via `npx shadcn@latest add`
 
 ---
 

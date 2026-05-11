@@ -32,6 +32,24 @@
 
 ---
 
+## [DEC-004] — Libreria UI: shadcn/ui
+- **Data:** 2026-05-11
+- **Contesto:** Fase Frontend MVP — Application Shell. Necessità di componenti UI accessibili e coerenti per sidebar, topbar, navigazione mobile, dashboard.
+- **Decisione presa:** Installare shadcn/ui (stile `new-york`, base-color `slate`, CSS variables attive)
+- **Motivazione:** Componenti copia-incolla basati su Radix UI; nessun bundle overhead (solo i componenti installati); supporto nativo Tailwind v4; compatibile con React 19 + Next.js 16; coerente con la palette slate già in uso
+- **Alternative scartate:**
+  - Pure Tailwind custom → più lento da sviluppare, meno accessibilità out-of-the-box
+  - Material UI / Chakra → vendor lock-in pesante, styling divergente dal design attuale
+- **Impatto:**
+  - Aggiunge dipendenze: `clsx`, `tailwind-merge`, `class-variance-authority`, `lucide-react`
+  - Crea `components.json` alla radice del progetto
+  - Crea `src/lib/utils.ts` (helper `cn()`)
+  - Modifica `globals.css` aggiungendo CSS custom properties per il tema shadcn
+- **Impatto futuro previsto:** I componenti shadcn vivono in `src/components/ui/` — aggiornamenti via `npx shadcn@latest add <component>`, non via npm update
+- **Approvata da:** Utente (2026-05-11)
+
+---
+
 ## [DEC-003] — Struttura tabella Reparti in Airtable
 - **Data:** 2026-05-06
 - **Contesto:** Definizione dei campi della tabella principale
