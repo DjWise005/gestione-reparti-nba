@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getRepartoById } from '@/lib/airtable';
 import { PageContainer, PageHeader } from '@/components/shared/PageContainer';
@@ -32,6 +33,9 @@ export default async function RepartoDetailPage({
 
   return (
     <PageContainer>
+      <Link href="/reparti" className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors mb-6">
+        ← Torna ai reparti
+      </Link>
       <PageHeader title={reparto.nomeReparto || 'Reparto'} />
 
       <div className="mb-6">
