@@ -1,12 +1,11 @@
 # Next Steps
 
 ## Priorità alta
-- [ ] Test produzione: verificare navigazione /reparti → /reparti/[id] su Vercel
-- [ ] Decidere prossima feature (da concordare con utente)
+- [ ] Introdurre service layer: `src/services/reparti.service.ts` (piano approvato — da implementare)
+- [ ] Dashboard con dati reali — dopo service layer
 
 ## Priorità media
-- [ ] Back button / breadcrumb su pagina /reparti/[id]
-- [ ] Dashboard con dati reali (statistiche: budget totale, media dipendenti, ecc.)
+- [ ] Test produzione back button /reparti/[id]
 
 ## Backlog
 - [ ] Autenticazione (PND-003 — rimandato a fase dedicata)

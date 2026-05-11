@@ -181,6 +181,18 @@
 
 ---
 
+## [2026-05-12] — Back button su /reparti/[id]
+
+| Campo       | Dettaglio                                                                    |
+|-------------|------------------------------------------------------------------------------|
+| File modificati | `src/app/(app)/reparti/[id]/page.tsx`                                    |
+| Modifica    | Aggiunto link "← Torna ai reparti" verso `/reparti` sopra il PageHeader; nessun componente nuovo |
+| Commit      | `7824575`                                                                    |
+| Eseguita da | Claude (approvazione utente)                                                 |
+| Esito       | ✅ Build pulita — pushato in produzione                                      |
+
+---
+
 ## [2026-05-12] — Feature: dettaglio reparto /reparti/[id]
 
 | Campo       | Dettaglio                                                                    |
