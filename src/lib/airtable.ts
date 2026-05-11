@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { AirtableResponse, RepartoFields, Reparto } from '@/types/airtable';
+import type { AirtableRecord, AirtableResponse, RepartoFields, Reparto } from '@/types/airtable';
 
 const BASE_URL = 'https://api.airtable.com/v0';
 
@@ -35,7 +35,33 @@ export async function getReparti(): Promise<Reparto[]> {
 
   const data: AirtableResponse<RepartoFields> = await res.json();
 
-  return data.records.map((record) => ({
+  return data.records.map((record) => mapReparto(record));
+}
+
+export async function getRepartoById(id: string): Promise<Reparto> {
+  const { token, baseId, tableId } = getConfig();
+
+  const url = `${BASE_URL}/${baseId}/${tableId}/${id}`;
+
+  const res = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    throw new Error(`Errore Airtable: ${res.status} ${res.statusText}`);
+  }
+
+  const record: AirtableRecord<RepartoFields> = await res.json();
+
+  return mapReparto(record);
+}
+
+function mapReparto(record: AirtableRecord<RepartoFields>): Reparto {
+  return {
     id: record.id,
     nomeReparto: record.fields['Nome Reparto'] ?? '',
     responsabile: record.fields['Responsabile'] ?? '',
@@ -46,5 +72,5 @@ export async function getReparti(): Promise<Reparto[]> {
     emailReparto: record.fields['Email Reparto'] ?? '',
     descrizione: record.fields['Descrizione'] ?? '',
     dataCreazione: record.fields['Data Creazione'] ?? '',
-  }));
+  };
 }
