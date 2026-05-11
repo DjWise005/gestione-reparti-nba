@@ -50,7 +50,7 @@ export default function Home() {
         </div>
 
         {/* CTA */}
-        <Link href="/reparti" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg shadow-blue-500/25 transition-all hover:scale-105 active:scale-95">
+        <Link href="/dashboard" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg shadow-blue-500/25 transition-all hover:scale-105 active:scale-95">
           Accedi alla piattaforma →
         </Link>
 
