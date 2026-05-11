@@ -20,7 +20,8 @@
 | Deploy su Vercel                            | ✅ Completato  |
 | Verifica qualità AI_CONTROL_CENTER          | ✅ Completato  |
 | Bootstrap Airtable Integration Layer        | ✅ Completato  |
-| Variabili d'ambiente su Vercel (ISS-003)    | ❌ Aperto      |
+| Variabili d'ambiente su Vercel (ISS-003)    | ✅ Risolto     |
+| Test produzione /api/reparti (T-06)         | ✅ Completato  |
 | UI visualizzazione Reparti                  | 🔲 Da fare    |
 
 ## Approvazioni ricevute

@@ -10,7 +10,7 @@
 - **Stato:** STABLE
 - **Ultimo aggiornamento:** 2026-05-11
 - **Deploy attivo:** https://gestione-reparti-nba.vercel.app
-- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 2 commit)
+- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 3 commit)
 
 ---
 
@@ -23,7 +23,7 @@
 | API routes Next.js      | ✅ Attive       | GET /api/reparti — revalidate 60s              |
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
 | GitHub Actions / CI     | ❌ Assente      | Nessuna pipeline configurata                   |
-| Vercel env variables    | ⚠️ Mancanti    | Token Airtable solo in `.env.local` locale     |
+| Vercel env variables    | ✅ Configurate  | Configurate manualmente dall'utente su Vercel  |
 
 ---
 
@@ -31,8 +31,8 @@
 - **Base:** Gestione Reparti NBA (`appFkHbvmtkKi0PYt`)
 - **Tabella Reparti:** `tblTGnRQ8C97uzpbI`
 - **Campi:** Nome Reparto · Responsabile · N° Dipendenti · Budget (€) · Sede · Stato · Email Reparto · Descrizione · Data Creazione
-- **Record presenti:** 0 (tabella vuota)
-- **SDK installato:** No — integrazione via REST API diretta da implementare
+- **Record presenti:** 6 (Amministrazione, Carrozzeria, Logistica, Officina, Preparazione, Vendite)
+- **SDK installato:** No — integrazione via fetch nativo (server-only)
 
 ---
 
@@ -61,12 +61,11 @@ src/
 |---------|--------------------------------------------|----------|
 | ISS-001 | GitHub↔Vercel connection non collegata     | 🟡 Media |
 | ISS-002 | Airtable `/meta/workspaces` inaccessibile  | 🟢 Bassa |
-| ISS-003 | Token Airtable non su Vercel env variables | 🔴 Alta  |
+| ~~ISS-003~~ | ~~Token Airtable non su Vercel env variables~~ | ✅ Risolto |
 
 ---
 
 ## Prossimi step (da NEXT_STEPS.md)
-1. Configurare variabili d'ambiente su Vercel (ISS-003)
-2. Creare route API `/api/reparti`
-3. Collegare GitHub a Vercel per deploy automatici
-4. Aggiornare metadata in `layout.tsx`
+1. Collegare GitHub a Vercel per deploy automatici (ISS-001)
+2. Aggiornare metadata in `layout.tsx`
+3. UI visualizzazione Reparti (pagina /reparti)

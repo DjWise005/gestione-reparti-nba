@@ -24,6 +24,17 @@
 
 ---
 
+## [TEST-007] — T-06: GET /api/reparti in produzione Vercel
+- **Data:** 2026-05-11
+- **Ambiente:** Produzione (https://gestione-reparti-nba.vercel.app/api/reparti)
+- **Cosa è stato testato:** Route API con variabili d'ambiente configurate manualmente su Vercel e build deployata da commit ef2bb2d
+- **Esito:** ✅ Passato
+- **Errore rilevato:** Nessuno
+- **Fix applicato:** —
+- **Risultato dopo fix:** 200 OK — 6 reparti reali restituiti (Amministrazione, Carrozzeria, Logistica, Officina, Preparazione, Vendite). ISS-003 chiusa.
+
+---
+
 ## [TEST-004] — T-05: Build TypeScript produzione
 - **Data:** 2026-05-11
 - **Ambiente:** Locale (`npm run build`)

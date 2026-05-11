@@ -60,6 +60,17 @@
 
 ---
 
+## [2026-05-11] — Deploy produzione e chiusura ISS-003
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File        | Vercel (env variables + deploy)                                  |
+| Modifica    | Variabili d'ambiente configurate manualmente dall'utente su Vercel; redeploy manuale via `vercel --prod` (commit ef2bb2d) |
+| Eseguita da | Utente (env vars) + Claude (deploy)                              |
+| Esito       | ✅ OK — T-06 passato in produzione, ISS-003 chiusa               |
+
+---
+
 ## [2026-05-11] — Bootstrap Airtable Integration Layer
 
 | Campo       | Dettaglio                                                        |
