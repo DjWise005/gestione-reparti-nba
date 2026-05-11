@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getReparti } from '@/lib/airtable';
+import { getRepartiList } from '@/services/reparti.service';
 import type { Reparto } from '@/types/airtable';
 import { PageContainer, PageHeader } from '@/components/shared/PageContainer';
 
@@ -17,7 +17,7 @@ export default async function RepartiPage() {
   let errore = false;
 
   try {
-    reparti = await getReparti();
+    reparti = await getRepartiList();
   } catch {
     errore = true;
   }

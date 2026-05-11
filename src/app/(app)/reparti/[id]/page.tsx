@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getRepartoById } from '@/lib/airtable';
+import { getRepartoDetail } from '@/services/reparti.service';
 import { PageContainer, PageHeader } from '@/components/shared/PageContainer';
 
 export const revalidate = 60;
@@ -19,7 +19,7 @@ export default async function RepartoDetailPage({
 }) {
   const { id } = await params;
 
-  const reparto = await getRepartoById(id).catch(() => notFound());
+  const reparto = await getRepartoDetail(id).catch(() => notFound());
 
   const campi = [
     { label: 'Responsabile',   value: reparto.responsabile },
