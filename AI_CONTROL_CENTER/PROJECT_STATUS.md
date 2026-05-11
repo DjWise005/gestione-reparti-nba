@@ -6,11 +6,11 @@
 ---
 
 ## Stato generale
-- **Versione:** v0.1.0
+- **Versione:** v0.2.0
 - **Stato:** STABLE
 - **Ultimo aggiornamento:** 2026-05-11
 - **Deploy attivo:** https://gestione-reparti-nba.vercel.app
-- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 5 commit)
+- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 6 commit)
 - **Auto-deploy:** ✅ Attivo — ogni push su `main` triggera deploy Vercel automatico
 
 ---
@@ -22,7 +22,7 @@
 | Next.js App (frontend)  | ✅ Funzionante  | Welcome page + pagina /reparti                 |
 | Airtable (database)     | ✅ Collegato    | 6 reparti presenti, API restituisce dati reali |
 | API routes Next.js      | ✅ Attive       | GET /api/reparti — revalidate 60s              |
-| Pagina /reparti         | ✅ Funzionante  | Server Component — test locale OK, prod da fare |
+| Pagina /reparti         | ✅ Funzionante  | Server Component — test locale ✅, test prod ✅  |
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
 | GitHub↔Vercel auto-deploy | ✅ Attivo     | Ogni push su main triggera deploy automatico   |
 | Vercel env variables    | ✅ Configurate  | Configurate manualmente dall'utente su Vercel  |

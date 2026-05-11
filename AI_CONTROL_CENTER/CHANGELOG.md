@@ -114,6 +114,17 @@
 
 ---
 
+## [2026-05-11] — v0.2.0 — Test produzione /reparti (T-11)
+
+| Campo       | Dettaglio                                                        |
+|-------------|------------------------------------------------------------------|
+| File        | Governance (`VERSION_HISTORY.md`, `PROJECT_STATUS.md`, `TEST_HISTORY.md`) |
+| Modifica    | T-11 passato in produzione — pagina /reparti verificata su Vercel; VERSION_HISTORY aggiornato a v0.2.0 STABLE |
+| Eseguita da | Utente (verifica manuale) + Claude (governance)                  |
+| Esito       | ✅ OK — v0.2.0 STABLE                                            |
+
+---
+
 ## [2026-05-11] — Pagina /reparti — Server Component
 
 | Campo       | Dettaglio                                                        |

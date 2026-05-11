@@ -2,6 +2,17 @@
 
 ---
 
+## [TEST-011] — T-11: Pagina /reparti in produzione Vercel
+- **Data:** 2026-05-11
+- **Ambiente:** Produzione (https://gestione-reparti-nba.vercel.app/reparti)
+- **Cosa è stato testato:** Rendering pagina /reparti in produzione dopo push commit f7769c3 — visualizzazione 6 reparti da Airtable, navigazione Home ↔ /reparti
+- **Esito:** ✅ Passato
+- **Errore rilevato:** Nessuno
+- **Fix applicato:** —
+- **Risultato dopo fix:** 6 reparti visualizzati in produzione; navigazione Home ↔ /reparti funzionante; grafica accettata provvisoriamente
+
+---
+
 ## [TEST-009] — T-10: Navigazione Home → /reparti (locale)
 - **Data:** 2026-05-11
 - **Ambiente:** Locale (http://localhost:3000)
