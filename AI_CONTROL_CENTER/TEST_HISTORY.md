@@ -24,6 +24,17 @@
 
 ---
 
+## [TEST-008] — T-07: Verifica auto-deploy GitHub↔Vercel
+- **Data:** 2026-05-11
+- **Ambiente:** Produzione (Vercel auto-deploy)
+- **Cosa è stato testato:** Push commit `e3550aa` su `main` per verificare che Vercel triggerasse deploy automatico senza `vercel --prod`
+- **Esito:** ✅ Passato
+- **Errore rilevato:** Nessuno
+- **Fix applicato:** —
+- **Risultato dopo fix:** Deploy automatico partito in 35s dal push, Ready in 20s. File di test `test-auto-deploy.txt` rimosso nel commit successivo. ISS-001 chiusa.
+
+---
+
 ## [TEST-007] — T-06: GET /api/reparti in produzione Vercel
 - **Data:** 2026-05-11
 - **Ambiente:** Produzione (https://gestione-reparti-nba.vercel.app/api/reparti)

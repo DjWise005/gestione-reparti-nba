@@ -60,6 +60,17 @@
 
 ---
 
+## [2026-05-11] — Verifica auto-deploy e chiusura ISS-001
+
+| Campo       | Dettaglio                                                                  |
+|-------------|----------------------------------------------------------------------------|
+| File        | `test-auto-deploy.txt` (creato e rimosso)                                  |
+| Modifica    | File di test creato, pushato su `main` (commit `e3550aa`), deploy automatico verificato in 35s, file rimosso |
+| Eseguita da | Utente (GitHub↔Vercel connection) + Claude (commit/push/rimozione file)    |
+| Esito       | ✅ OK — ISS-001 chiusa, auto-deploy attivo                                  |
+
+---
+
 ## [2026-05-11] — Deploy produzione e chiusura ISS-003
 
 | Campo       | Dettaglio                                                        |

@@ -2,14 +2,11 @@
 
 ## Sessione attiva
 - **Data:** 2026-05-11
-- **Obiettivo sessione:** Bootstrap Airtable Integration Layer — route API server-side
+- **Obiettivo sessione:** Chiusura ISS-001 — verifica e documentazione GitHub↔Vercel auto-deploy
 
 ## File coinvolti
-- `src/types/airtable.ts` (creato)
-- `src/lib/airtable.ts` (creato)
-- `src/app/api/reparti/route.ts` (creato)
-- `package.json` (aggiornato — server-only)
-- `AI_CONTROL_CENTER/CHANGELOG.md`, `PROJECT_STATUS.md`, `TEST_HISTORY.md`, `SESSION_CONTEXT.md` (aggiornati)
+- `test-auto-deploy.txt` (creato per test → rimosso)
+- `AI_CONTROL_CENTER/OPEN_ISSUES.md`, `PROJECT_STATUS.md`, `SESSION_CONTEXT.md`, `TEST_HISTORY.md`, `CHANGELOG.md` (aggiornati)
 
 ## Stato avanzamento
 | Step                                        | Stato         |
@@ -22,6 +19,7 @@
 | Bootstrap Airtable Integration Layer        | ✅ Completato  |
 | Variabili d'ambiente su Vercel (ISS-003)    | ✅ Risolto     |
 | Test produzione /api/reparti (T-06)         | ✅ Completato  |
+| GitHub↔Vercel auto-deploy (ISS-001)         | ✅ Risolto     |
 | UI visualizzazione Reparti                  | 🔲 Da fare    |
 
 ## Approvazioni ricevute
