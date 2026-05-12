@@ -68,7 +68,7 @@
 - Service layer + dashboard dati reali approvati e completati (2026-05-12)
 
 ## Blocchi / In attesa
-- Nessun blocco attivo
+- Environment separation setup in progress (RSK-001 — Fase C: develop branch → Vercel Preview)
 
 ## Rischi residui
 - ~~ANO-001 — Campi Airtable vuoti~~ → ✅ RISOLTA TECNICAMENTE (dataset demo popolato)
