@@ -7,10 +7,10 @@
 
 ## Stato generale
 - **Versione:** v0.4.0
-- **Stato:** STABLE
+- **Stato:** FUNCTIONALLY VALIDATED
 - **Ultimo aggiornamento:** 2026-05-12
 - **Deploy attivo:** https://gestione-reparti-nba.vercel.app
-- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 25 commit)
+- **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 27 commit)
 - **Auto-deploy:** ✅ Attivo — ogni push su `main` triggera deploy Vercel automatico
 
 ---
@@ -25,7 +25,7 @@
 | API routes Next.js      | ✅ Attive       | GET /api/reparti — revalidate 60s              |
 | Pagina /reparti         | ✅ Funzionante  | Server Component — tabella cliccabile          |
 | Pagina /reparti/[id]    | ✅ Funzionante  | Server Component — dettaglio con dati reali    |
-| Pagina /dashboard       | ✅ Funzionante  | 7 statistiche aggregate da Airtable via service |
+| Pagina /dashboard       | ✅ Validata     | 7 statistiche end-to-end: raw Airtable → API → service → UI |
 | Pagina /impostazioni    | ✅ Funzionante  | Info sistema reali: versione, ambiente, stato, ANO-001 |
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
 | GitHub↔Vercel auto-deploy | ✅ Attivo     | Ogni push su main triggera deploy automatico   |
@@ -39,6 +39,8 @@
 - **Campi:** Nome Reparto · Responsabile · N° Dipendenti · Budget (€) · Sede · Stato · Email Reparto · Descrizione · Data Creazione
 - **Record presenti:** 6 (Amministrazione, Carrozzeria, Logistica, Officina, Preparazione, Vendite)
 - **SDK installato:** No — integrazione via fetch nativo (server-only)
+
+> ⚠️ **Dataset attuale: DEMO / QA** — I valori di Stato, Budget e N° Dipendenti presenti sono dati demo inseriti a scopo di test e validazione tecnica. Non rappresentano dati operativi reali aziendali. Vanno sostituiti con dati reali prima di un uso operativo.
 
 ---
 
@@ -63,7 +65,7 @@ src/
 │   │   ├── dashboard/
 │   │   │   └── page.tsx        ✅ statistiche reali via getRepartiStats()
 │   │   ├── impostazioni/
-│   │   │   └── page.tsx        🟡 placeholder
+│   │   │   └── page.tsx        ✅ info sistema reali (v0.4.0, ambiente, ANO-001)
 │   │   ├── reparti/
 │   │   │   ├── [id]/
 │   │   │   │   └── page.tsx    ✅ Server Component — dettaglio reparto
@@ -107,11 +109,20 @@ src/
 ---
 
 ## Anomalie note
-| ID     | Descrizione                                                    | Priorità  |
-|--------|----------------------------------------------------------------|-----------|
-| ANO-001 | Campi Airtable vuoti: Stato, Budget, N° Dipendenti — dashboard mostra zeri | 🟡 Non bloccante |
+| ID      | Descrizione                                                                   | Priorità      | Stato    |
+|---------|-------------------------------------------------------------------------------|---------------|----------|
+| ~~ANO-001~~ | ~~Campi Airtable vuoti: Stato, Budget, N° Dipendenti — dashboard mostra zeri~~ | —         | ✅ RISOLTA TECNICAMENTE — dataset demo popolato, validazione end-to-end completata |
+
+## Rischi residui
+| ID      | Rischio                                                                                  | Priorità  |
+|---------|------------------------------------------------------------------------------------------|-----------|
+| RSK-001 | **Assenza separazione ambienti (architetturale critico)** — unico Vercel deployment usato per sviluppo e produzione. Dati demo e operativi convivono nello stesso Airtable. Conseguenze: debugging ambiguo, audit impossibile, forecasting/KPI/AI futuri contaminati da seed data, nessuna possibilità di rollback sicuro. | 🔴 Alta |
+| RSK-002 | **Contaminazione dataset demo/reale (architetturale critico)** — i record attuali contengono valori inseriti a scopo di test QA. Nessuna distinzione tecnica tra seed data e dati operativi. Conseguenze: qualsiasi analisi, KPI, o logica futura basata su questi dati produrrebbe risultati inaffidabili; un audit non potrebbe distinguere dato reale da dato di test. | 🔴 Alta |
+| RSK-003 | Route `(app)/` accessibili senza autenticazione (accettato — DEC-005) | 🟡 Media |
+| RSK-004 | **Assenza schema enforcement / validazione dati lato server** — Airtable accetta valori arbitrari senza validazione: stati non previsti (typo, valori liberi), budget negativi o incoerenti, N° Dipendenti come testo libero, formati inconsistenti tra record. Nessun layer applicativo valida i dati in ingresso prima della lettura. Conseguenze: corruzione logica silenziosa di KPI, aggregazioni, forecasting e workflow futuri. | 🔴 Alta |
 
 ## Prossimi step (da NEXT_STEPS.md)
-1. Popolare dati Airtable (Stato, Budget, N° Dipendenti) — azione manuale utente
-2. Pianificare prossima feature di sviluppo
-3. Pianificare autenticazione (PND-003)
+1. Definire strategia separazione ambienti DEV/TEST/PROD (RSK-001)
+2. Definire strategia seed/demo data e distinzione da dati operativi (RSK-002)
+3. Pianificare prossima feature di sviluppo
+4. Pianificare autenticazione (PND-003)

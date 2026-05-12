@@ -181,6 +181,21 @@
 
 ---
 
+## [2026-05-12] — Validazione end-to-end + popolamento dataset demo QA
+
+| Campo       | Dettaglio                                                                                   |
+|-------------|---------------------------------------------------------------------------------------------|
+| Scope       | Solo dati Airtable — nessuna modifica codice                                                |
+| Azione      | PATCH Airtable su 3 record (Officina, Preparazione, Vendite) con dataset demo QA: Stato, Budget (€), N° Dipendenti |
+| Dataset demo | Officina: Attivo / €8.500 / 15 dip · Preparazione: In Ristrutturazione / €2.000 / 4 dip · Vendite: Attivo / €11.000 / 9 dip |
+| Verifica    | Raw Airtable ✅ · /api/reparti ✅ · ISR scadenza attesa ✅ · /dashboard ✅ · /reparti ✅    |
+| Risultato dashboard | Attivi: 3 · Inattivi: 1 · In Ristr.: 2 · Budget totale: €29.000 · Top: Logistica (50 dip) |
+| Eseguita da | Claude (PATCH via API) + utente (3 record preesistenti)                                     |
+| Esito       | ✅ ANO-001 risolta tecnicamente — validazione end-to-end completa in produzione             |
+| Rischio aperto | Dataset è DEMO/QA — nessuna separazione ambienti DEV/TEST/PROD (RSK-001, RSK-002)      |
+
+---
+
 ## [2026-05-12] — Pagina /impostazioni con contenuto reale
 
 | Campo       | Dettaglio                                                                    |

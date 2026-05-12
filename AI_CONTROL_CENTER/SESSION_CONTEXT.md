@@ -56,6 +56,10 @@
 | Error handling dashboard                          | ✅ Completato  | `ab5408d`  |
 | /impostazioni con contenuto reale                 | ✅ Completato  | `ed395cf`  |
 | Test produzione /impostazioni                     | ✅ Completato  | —          |
+| PATCH Airtable — 3 record demo (Officina/Prep/Vendite) | ✅ Completato | —     |
+| Verifica raw Airtable post-PATCH                  | ✅ Completato  | —          |
+| Verifica /api/reparti + scadenza cache ISR        | ✅ Completato  | —          |
+| Validazione end-to-end dashboard + /reparti       | ✅ Completato  | —          |
 
 ## Approvazioni ricevute
 - DEC-004 shadcn/ui approvato (2026-05-11)
@@ -64,11 +68,16 @@
 - Service layer + dashboard dati reali approvati e completati (2026-05-12)
 
 ## Blocchi / In attesa
-- Popolamento dati Airtable (Stato, Budget, N° Dipendenti) — azione manuale utente
+- Nessun blocco attivo
 
 ## Rischi residui
-- Campi Airtable vuoti: Stato, Budget, N° Dipendenti — dashboard mostra zeri (non bloccante)
-- Route `(app)/` accessibili senza login (accettato — DEC-005)
+- ~~ANO-001 — Campi Airtable vuoti~~ → ✅ RISOLTA TECNICAMENTE (dataset demo popolato)
+- **RSK-001** 🔴 — Assenza separazione ambienti DEV/TEST/PROD — dati demo e operativi convivono; debugging/audit/AI futuri compromessi
+- **RSK-002** 🔴 — Contaminazione dataset demo/reale — nessuna distinzione tecnica; KPI e forecasting inaffidabili
+- **RSK-003** 🟡 — Route `(app)/` accessibili senza autenticazione (accettato — DEC-005)
+- **RSK-004** 🔴 — Assenza schema enforcement: Airtable accetta valori arbitrari, nessuna validazione server-side
+
+> ⚠️ Il dataset Airtable popolato in questa sessione è **demo / QA**. Non rappresenta dati operativi reali aziendali.
 
 ## Milestone completate
 - ✅ **Application Shell MVP** — Sidebar + Topbar + MobileNav + routing completo
@@ -79,6 +88,7 @@
 - ✅ **Service layer** — `reparti.service.ts` attivo, pages disaccoppiate da Airtable client
 - ✅ **Dashboard dati reali** — statistiche aggregate da Airtable via service, test produzione OK
 - ✅ **Impostazioni** — info sistema reali, test produzione OK — nessun placeholder rimasto
+- ✅ **Dataset Airtable completo + validazione ISR/API/dashboard end-to-end** — raw Airtable → /api/reparti → service → /dashboard → /reparti verificati in produzione; ISR comportamento confermato
 
 ## Versione corrente
-- v0.4.0 — Tutte le route (app) con contenuto reale
+- v0.4.0 FUNCTIONALLY VALIDATED — piattaforma validata end-to-end in produzione con dataset demo QA
