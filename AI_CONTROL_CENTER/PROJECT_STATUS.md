@@ -12,6 +12,8 @@
 - **Deploy attivo:** https://gestione-reparti-nba.vercel.app
 - **Repository:** https://github.com/DjWise005/gestione-reparti-nba (branch: main, 27 commit)
 - **Auto-deploy:** ✅ Attivo — ogni push su `main` triggera deploy Vercel automatico
+- **Branch attivi:** `main` (Production) · `develop` (Preview)
+- **Ambienti Vercel:** Production → Airtable PROD · Preview → Airtable TEST (separazione validata 2026-05-12)
 
 ---
 
@@ -30,6 +32,8 @@
 | Autenticazione          | ❌ Assente      | Non pianificata nella versione corrente         |
 | GitHub↔Vercel auto-deploy | ✅ Attivo     | Ogni push su main triggera deploy automatico   |
 | Vercel env variables    | ✅ Configurate  | Configurate manualmente dall'utente su Vercel  |
+| Branch develop          | ✅ Attivo       | Creato e pushato — Preview deployment collegato |
+| Airtable TEST base      | ✅ Attiva       | Base separata da PROD — dataset SEED DATA TEST ENV |
 
 ---
 
@@ -116,13 +120,13 @@ src/
 ## Rischi residui
 | ID      | Rischio                                                                                  | Priorità  |
 |---------|------------------------------------------------------------------------------------------|-----------|
-| RSK-001 | **Assenza separazione ambienti (architetturale critico)** — unico Vercel deployment usato per sviluppo e produzione. Dati demo e operativi convivono nello stesso Airtable. Conseguenze: debugging ambiguo, audit impossibile, forecasting/KPI/AI futuri contaminati da seed data, nessuna possibilità di rollback sicuro. | 🔴 Alta |
-| RSK-002 | **Contaminazione dataset demo/reale (architetturale critico)** — i record attuali contengono valori inseriti a scopo di test QA. Nessuna distinzione tecnica tra seed data e dati operativi. Conseguenze: qualsiasi analisi, KPI, o logica futura basata su questi dati produrrebbe risultati inaffidabili; un audit non potrebbe distinguere dato reale da dato di test. | 🔴 Alta |
+| RSK-001 | **Separazione ambienti — MITIGATO FASE 1** — branch develop + Preview deployment + Airtable TEST separata da PROD, validati 2026-05-12. Restano aperti: .env.local → Airtable TEST, regola operativa sviluppo su develop, branch protection su main, procedura PR develop→main, seed script controllato. | 🟡 Media |
+| RSK-002 | **Contaminazione dataset demo/reale — MITIGATO FASE 1** — Preview usa Airtable TEST con dataset "SEED DATA — TEST ENV" separato da PROD; cross-contamination test passato 2026-05-12. Restano aperti: seed script controllato, distinzione esplicita formale nei record. | 🟡 Media |
 | RSK-003 | Route `(app)/` accessibili senza autenticazione (accettato — DEC-005) | 🟡 Media |
 | RSK-004 | **Assenza schema enforcement / validazione dati lato server** — Airtable accetta valori arbitrari senza validazione: stati non previsti (typo, valori liberi), budget negativi o incoerenti, N° Dipendenti come testo libero, formati inconsistenti tra record. Nessun layer applicativo valida i dati in ingresso prima della lettura. Conseguenze: corruzione logica silenziosa di KPI, aggregazioni, forecasting e workflow futuri. | 🔴 Alta |
 
 ## Prossimi step (da NEXT_STEPS.md)
-1. Definire strategia separazione ambienti DEV/TEST/PROD (RSK-001)
-2. Definire strategia seed/demo data e distinzione da dati operativi (RSK-002)
+1. ~~Separazione ambienti~~ → MITIGATO FASE 1 — completare Fase 2 (.env.local, branch protection, PR procedure, seed script)
+2. ~~Strategia seed/demo data~~ → MITIGATO FASE 1 — completare seed script controllato
 3. Pianificare prossima feature di sviluppo
 4. Pianificare autenticazione (PND-003)

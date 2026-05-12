@@ -60,6 +60,9 @@
 | Verifica raw Airtable post-PATCH                  | ✅ Completato  | —          |
 | Verifica /api/reparti + scadenza cache ISR        | ✅ Completato  | —          |
 | Validazione end-to-end dashboard + /reparti       | ✅ Completato  | —          |
+| Branch develop creato e pushato                   | ✅ Completato  | `e81ac38`  |
+| Vercel Preview deployment attivo                  | ✅ Completato  | —          |
+| Cross-contamination test passato                  | ✅ Completato  | —          |
 
 ## Approvazioni ricevute
 - DEC-004 shadcn/ui approvato (2026-05-11)
@@ -68,7 +71,7 @@
 - Service layer + dashboard dati reali approvati e completati (2026-05-12)
 
 ## Blocchi / In attesa
-- Environment separation setup in progress (RSK-001 — Fase C: develop branch → Vercel Preview)
+- ~~Environment separation setup in progress~~ → ✅ Fase 1 validata — Fase 2 da completare (.env.local, branch protection, PR procedure, seed script)
 
 ## Rischi residui
 - ~~ANO-001 — Campi Airtable vuoti~~ → ✅ RISOLTA TECNICAMENTE (dataset demo popolato)
@@ -89,6 +92,7 @@
 - ✅ **Dashboard dati reali** — statistiche aggregate da Airtable via service, test produzione OK
 - ✅ **Impostazioni** — info sistema reali, test produzione OK — nessun placeholder rimasto
 - ✅ **Dataset Airtable completo + validazione ISR/API/dashboard end-to-end** — raw Airtable → /api/reparti → service → /dashboard → /reparti verificati in produzione; ISR comportamento confermato
+- ✅ **Separazione ambienti Fase 1** — branch develop, Vercel Preview, Airtable TEST separata da PROD, cross-contamination test passato (RSK-001/002 MITIGATI FASE 1)
 
 ## Versione corrente
 - v0.4.0 FUNCTIONALLY VALIDATED — piattaforma validata end-to-end in produzione con dataset demo QA

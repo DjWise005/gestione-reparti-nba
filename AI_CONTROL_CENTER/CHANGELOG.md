@@ -5,6 +5,19 @@
 
 ---
 
+## [2026-05-12] — Separazione ambienti Fase 1 (RSK-001 / RSK-002)
+
+| Campo       | Dettaglio                                                                                   |
+|-------------|---------------------------------------------------------------------------------------------|
+| Scope       | Governance + infrastruttura — nessuna modifica codice applicativo                           |
+| Azioni      | Branch `develop` creato e pushato; Vercel Preview deployment attivo; env vars Preview configurate manualmente dall'utente (`AIRTABLE_BASE_ID` e `AIRTABLE_TABLE_REPARTI` separati per Production/Preview); cross-contamination test passato |
+| Verifica    | Preview → Airtable TEST ✅ (descrizione "SEED DATA — TEST ENV") · Production → Airtable PROD ✅ (dati operativi non contaminati) |
+| Commit      | `e81ac38` (trigger Preview deployment)                                                      |
+| Eseguita da | Utente (Fase B env vars) + Claude (branch, commit, push, verifica)                         |
+| Esito       | ✅ RSK-001 e RSK-002 MITIGATI FASE 1 — restano .env.local, branch protection, PR procedure, seed script |
+
+---
+
 ## [2026-05-05] — Inizializzazione progetto Next.js
 
 | Campo       | Dettaglio                                              |
