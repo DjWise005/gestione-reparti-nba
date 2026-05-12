@@ -5,6 +5,19 @@
 
 ---
 
+## [2026-05-12] — Separazione ambienti Fase 2 — completamento operativo
+
+| Campo       | Dettaglio                                                                                   |
+|-------------|---------------------------------------------------------------------------------------------|
+| Scope       | Governance + infrastruttura — nessuna modifica codice applicativo                           |
+| Azioni      | `.env.local` aggiornato → Airtable TEST (valori tecnici non riportati in governance); branch protection `main` attivata via GitHub UI; `AI_CONTROL_CENTER/WORKFLOW_PR.md` creato (workflow, checklist QA, hotfix, convenzioni commit) |
+| Verifica    | Locale `/api/reparti` → "SEED DATA — TEST ENV" su tutti i record ✅                        |
+| Commit      | `c8f5586` WORKFLOW_PR.md · `d242431` governance Fase 1                                     |
+| Eseguita da | Utente (branch protection UI) + Claude (`.env.local`, workflow doc, governance)            |
+| Esito       | ✅ RSK-001 e RSK-002 MITIGATI OPERATIVAMENTE — DEV/PREVIEW/PROD isolati completamente      |
+
+---
+
 ## [2026-05-12] — Separazione ambienti Fase 1 (RSK-001 / RSK-002)
 
 | Campo       | Dettaglio                                                                                   |

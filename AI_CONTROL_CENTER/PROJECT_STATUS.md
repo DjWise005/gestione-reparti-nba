@@ -34,6 +34,9 @@
 | Vercel env variables    | ✅ Configurate  | Configurate manualmente dall'utente su Vercel  |
 | Branch develop          | ✅ Attivo       | Creato e pushato — Preview deployment collegato |
 | Airtable TEST base      | ✅ Attiva       | Base separata da PROD — dataset SEED DATA TEST ENV |
+| Branch protection main  | ✅ Attiva       | Push diretti bloccati — obbligatorio PR develop→main |
+| .env.local (locale)     | ✅ Isolato      | Punta ad Airtable TEST — sviluppo locale separato da PROD |
+| Workflow PR             | ✅ Formalizzato | WORKFLOW_PR.md — checklist QA, hotfix, convenzioni commit |
 
 ---
 
@@ -120,13 +123,14 @@ src/
 ## Rischi residui
 | ID      | Rischio                                                                                  | Priorità  |
 |---------|------------------------------------------------------------------------------------------|-----------|
-| RSK-001 | **Separazione ambienti — MITIGATO FASE 1** — branch develop + Preview deployment + Airtable TEST separata da PROD, validati 2026-05-12. Restano aperti: .env.local → Airtable TEST, regola operativa sviluppo su develop, branch protection su main, procedura PR develop→main, seed script controllato. | 🟡 Media |
-| RSK-002 | **Contaminazione dataset demo/reale — MITIGATO FASE 1** — Preview usa Airtable TEST con dataset "SEED DATA — TEST ENV" separato da PROD; cross-contamination test passato 2026-05-12. Restano aperti: seed script controllato, distinzione esplicita formale nei record. | 🟡 Media |
+| RSK-001 | **Separazione ambienti — MITIGATO OPERATIVAMENTE** — DEV (locale) · Preview · Production su Airtable separate; branch protection su main; workflow PR formalizzato; .env.local isolato su TEST. Residuo: seed script controllato (backlog). | 🟢 Bassa |
+| RSK-002 | **Contaminazione dataset demo/reale — MITIGATO OPERATIVAMENTE** — tre ambienti distinti con dataset indipendenti; cross-contamination test passato. Residuo: seed script controllato (backlog). | 🟢 Bassa |
 | RSK-003 | Route `(app)/` accessibili senza autenticazione (accettato — DEC-005) | 🟡 Media |
 | RSK-004 | **Assenza schema enforcement / validazione dati lato server** — Airtable accetta valori arbitrari senza validazione: stati non previsti (typo, valori liberi), budget negativi o incoerenti, N° Dipendenti come testo libero, formati inconsistenti tra record. Nessun layer applicativo valida i dati in ingresso prima della lettura. Conseguenze: corruzione logica silenziosa di KPI, aggregazioni, forecasting e workflow futuri. | 🔴 Alta |
 
 ## Prossimi step (da NEXT_STEPS.md)
-1. ~~Separazione ambienti~~ → MITIGATO FASE 1 — completare Fase 2 (.env.local, branch protection, PR procedure, seed script)
-2. ~~Strategia seed/demo data~~ → MITIGATO FASE 1 — completare seed script controllato
-3. Pianificare prossima feature di sviluppo
-4. Pianificare autenticazione (PND-003)
+1. ~~Separazione ambienti~~ → ✅ MITIGATO OPERATIVAMENTE — Fase 1+2 complete
+2. ~~Strategia seed/demo data~~ → ✅ MITIGATO OPERATIVAMENTE — seed script rimane in backlog
+3. Schema enforcement e validazione dati (RSK-004 — priorità alta)
+4. Pianificare prossima feature di sviluppo
+5. Pianificare autenticazione (PND-003)

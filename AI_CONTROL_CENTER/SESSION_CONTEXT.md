@@ -63,6 +63,9 @@
 | Branch develop creato e pushato                   | ✅ Completato  | `e81ac38`  |
 | Vercel Preview deployment attivo                  | ✅ Completato  | —          |
 | Cross-contamination test passato                  | ✅ Completato  | —          |
+| .env.local isolato su Airtable TEST               | ✅ Completato  | —          |
+| Branch protection main attiva                     | ✅ Completato  | —          |
+| WORKFLOW_PR.md creato                             | ✅ Completato  | `c8f5586`  |
 
 ## Approvazioni ricevute
 - DEC-004 shadcn/ui approvato (2026-05-11)
@@ -71,7 +74,7 @@
 - Service layer + dashboard dati reali approvati e completati (2026-05-12)
 
 ## Blocchi / In attesa
-- ~~Environment separation setup in progress~~ → ✅ Fase 1 validata — Fase 2 da completare (.env.local, branch protection, PR procedure, seed script)
+- Nessun blocco attivo — separazione ambienti Fase 1+2 completata
 
 ## Rischi residui
 - ~~ANO-001 — Campi Airtable vuoti~~ → ✅ RISOLTA TECNICAMENTE (dataset demo popolato)
@@ -92,7 +95,7 @@
 - ✅ **Dashboard dati reali** — statistiche aggregate da Airtable via service, test produzione OK
 - ✅ **Impostazioni** — info sistema reali, test produzione OK — nessun placeholder rimasto
 - ✅ **Dataset Airtable completo + validazione ISR/API/dashboard end-to-end** — raw Airtable → /api/reparti → service → /dashboard → /reparti verificati in produzione; ISR comportamento confermato
-- ✅ **Separazione ambienti Fase 1** — branch develop, Vercel Preview, Airtable TEST separata da PROD, cross-contamination test passato (RSK-001/002 MITIGATI FASE 1)
+- ✅ **Separazione ambienti Fase 1+2** — branch develop, Preview, Airtable TEST/PROD separati, .env.local isolato, branch protection main, workflow PR formalizzato (RSK-001/002 MITIGATI OPERATIVAMENTE)
 
 ## Versione corrente
 - v0.4.0 FUNCTIONALLY VALIDATED — piattaforma validata end-to-end in produzione con dataset demo QA
