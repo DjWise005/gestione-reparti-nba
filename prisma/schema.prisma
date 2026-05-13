@@ -1,0 +1,588 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ============================================================================
+// AUTENTICAZIONE E UTENTI
+// ============================================================================
+
+model User {
+  id              String   @id @default(uuid())
+  clerkUserId     String   @unique @map("clerk_user_id")
+  email           String   @unique
+  nome            String
+  cognome         String?
+  telefono        String?
+  ruoloDefault    RuoloEnum @default(VENDITORE) @map("ruolo_default")
+  repartoId       String?  @map("reparto_id")
+  externalCompanyId String? @map("external_company_id")
+  attivo          Boolean  @default(true)
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  reparto          Department?       @relation("UserReparto", fields: [repartoId], references: [id])
+  externalCompany  ExternalCompany?  @relation("UserExternalCompany", fields: [externalCompanyId], references: [id])
+  ordersCreated    Order[]           @relation("OrderCreator")
+  ordersSales      Order[]           @relation("OrderSalesOwner")
+  ordersAdmin      Order[]           @relation("OrderAdminOwner")
+  phasesAssigned   OrderPhase[]      @relation("PhaseAssignedUser")
+  notifications    Notification[]
+  auditLogs        AuditLog[]
+
+  @@map("users")
+}
+
+enum RuoloEnum {
+  ADMIN
+  VENDITORE
+  REPARTO
+  ESTERNO
+  SUPERVISORE
+}
+
+model Department {
+  id                        String   @id @default(uuid())
+  nome                      String   @unique
+  descrizione               String?
+  tipo                      TipoDepartmentEnum @default(INTERNO)
+  ordineVisualizzazione     Int      @map("ordine_visualizzazione")
+  attivo                    Boolean  @default(true)
+  coloreUi                  String?  @map("colore_ui")
+  responsabileUserId        String?  @map("responsabile_user_id")
+  durataStandardGiorni      Decimal? @map("durata_standard_giorni") @db.Decimal(5, 2)
+  bufferStandardGiorni      Decimal? @map("buffer_standard_giorni") @db.Decimal(5, 2)
+  bloccanteDefault          Boolean  @default(false) @map("bloccante_default")
+  parallelizzabileDefault   Boolean  @default(false) @map("parallelizzabile_default")
+  rinviabileDefault         Boolean  @default(false) @map("rinviabile_default")
+  richiedeAppuntamentoDefault Boolean @default(false) @map("richiede_appuntamento_default")
+  createdAt                 DateTime @default(now()) @map("created_at")
+  updatedAt                 DateTime @updatedAt @map("updated_at")
+
+  users        User[]       @relation("UserReparto")
+  orderPhases  OrderPhase[]
+  checklists   Checklist[]
+
+  @@map("departments")
+}
+
+enum TipoDepartmentEnum {
+  INTERNO
+  ESTERNO_LOGICO
+  AMMINISTRATIVO
+  LOGISTICO
+}
+
+model ExternalCompany {
+  id                 String   @id @default(uuid())
+  nome               String
+  tipo               TipoExternalCompanyEnum
+  referente          String?
+  telefono           String?
+  email              String?
+  attiva             Boolean  @default(true)
+  capacitaGiornaliera Int?    @map("capacita_giornaliera")
+  note               String?
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  users       User[]       @relation("UserExternalCompany")
+  orderPhases OrderPhase[]
+  workItems   WorkItem[]
+
+  @@map("external_companies")
+}
+
+enum TipoExternalCompanyEnum {
+  CARROZZERIA
+  LAVORI_TERZI
+  OFFICINA_ESTERNA
+  PREPARAZIONE_ESTERNA
+  LOGISTICA
+  ALTRO
+}
+
+model Customer {
+  id              String   @id @default(uuid())
+  nome            String
+  cognome         String?
+  ragioneSociale  String?  @map("ragione_sociale")
+  tipoCliente     TipoClienteEnum @default(PRIVATO) @map("tipo_cliente")
+  telefono        String?
+  email           String?
+  note            String?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  orders       Order[]
+  appointments Appointment[]
+
+  @@map("customers")
+}
+
+enum TipoClienteEnum {
+  PRIVATO
+  AZIENDA
+  COMMERCIANTE
+  ALTRO
+}
+
+model Vehicle {
+  id               String   @id @default(uuid())
+  marca            String
+  modello          String
+  allestimento     String?
+  anno             Int?
+  targa            String?
+  telaioCompleto   String?  @map("telaio_completo")
+  telaioUltime5    String   @map("telaio_ultime_5") @db.VarChar(5)
+  km               Int?
+  colore           String?
+  alimentazione    String?
+  note             String?
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  orders Order[]
+
+  @@index([telaioUltime5])
+  @@map("vehicles")
+}
+
+model Order {
+  id                        String   @id @default(uuid())
+  numeroOrdine              String   @unique @map("numero_ordine")
+  customerId                String   @map("customer_id")
+  vehicleId                 String   @map("vehicle_id")
+  orderType                 TipoOrdineEnum @map("order_type")
+  orderStatus               StatoOrdineEnum @map("order_status") @default(BOZZA)
+  generalDescription        String?  @map("general_description")
+  requestedBy               String   @map("requested_by")
+  salesOwnerId              String?  @map("sales_owner_id")
+  adminOwnerId              String?  @map("admin_owner_id")
+  priorityLevel             PrioritaEnum @default(MEDIA) @map("priority_level")
+  theoreticalDeliveryDate   DateTime? @map("theoretical_delivery_date")
+  expectedDeliveryDate      DateTime? @map("expected_delivery_date")
+  promisedDeliveryDate      DateTime? @map("promised_delivery_date")
+  deliveryRiskStatus        RischioConsegnaEnum? @map("delivery_risk_status")
+  deliveryDelayDays         Int?     @map("delivery_delay_days")
+  lastRecalcAt              DateTime? @map("last_recalc_at")
+  recalculationReason       String?  @map("recalculation_reason")
+  completionLockedAt        DateTime? @map("completion_locked_at")
+  completionLockedBy        String?  @map("completion_locked_by")
+  readyForDeliveryAt        DateTime? @map("ready_for_delivery_at")
+  closedAt                  DateTime? @map("closed_at")
+  closedBy                  String?  @map("closed_by")
+  cancelledAt               DateTime? @map("cancelled_at")
+  cancelledBy               String?  @map("cancelled_by")
+  cancellationReason        String?  @map("cancellation_reason")
+  createdAt                 DateTime @default(now()) @map("created_at")
+  createdBy                 String   @map("created_by")
+  updatedAt                 DateTime @updatedAt @map("updated_at")
+  updatedBy                 String?  @map("updated_by")
+
+  customer      Customer       @relation(fields: [customerId], references: [id])
+  vehicle       Vehicle        @relation(fields: [vehicleId], references: [id])
+  creator       User           @relation("OrderCreator", fields: [createdBy], references: [id])
+  salesOwner    User?          @relation("OrderSalesOwner", fields: [salesOwnerId], references: [id])
+  adminOwner    User?          @relation("OrderAdminOwner", fields: [adminOwnerId], references: [id])
+  phases        OrderPhase[]
+  workItems     WorkItem[]
+  accessories   Accessory[]
+  appointments  Appointment[]
+  attachments   Attachment[]
+  notifications Notification[]
+  auditLogs     AuditLog[]
+
+  @@map("orders")
+}
+
+enum TipoOrdineEnum {
+  VENDITA
+  OFFICINA
+  GARANZIA
+  CARROZZERIA
+  PREPARAZIONE
+  ALTRO
+}
+
+enum StatoOrdineEnum {
+  BOZZA
+  COMPLETATO
+  IN_LAVORAZIONE
+  SOSPESO
+  PRONTO_PER_CONSEGNA
+  CHIUSO
+  ANNULLATO
+}
+
+enum PrioritaEnum {
+  BASSA
+  MEDIA
+  ALTA
+  URGENTE
+}
+
+enum RischioConsegnaEnum {
+  REGOLARE
+  A_RISCHIO
+  RITARDO_PROBABILE
+  NON_CONFERMABILE
+}
+
+model OrderPhase {
+  id                      String   @id @default(uuid())
+  orderId                 String   @map("order_id")
+  departmentId            String   @map("department_id")
+  phaseName               String?  @map("phase_name")
+  phaseSequence           Int      @map("phase_sequence")
+  phaseInstanceNumber     Int      @default(1) @map("phase_instance_number")
+  phaseStatus             StatoFaseEnum @default(NON_PREVISTA) @map("phase_status")
+  phaseBlockingFlag       Boolean  @default(false) @map("phase_blocking_flag")
+  phaseParallelFlag       Boolean  @default(false) @map("phase_parallel_flag")
+  phaseDeferrableFlag     Boolean  @default(false) @map("phase_deferrable_flag")
+  estimatedDurationDays   Decimal? @map("estimated_duration_days") @db.Decimal(5, 2)
+  bufferDays              Decimal? @map("buffer_days") @db.Decimal(5, 2)
+  plannedStartDate        DateTime? @map("planned_start_date")
+  plannedEndDate          DateTime? @map("planned_end_date")
+  actualStartAt           DateTime? @map("actual_start_at")
+  actualEndAt             DateTime? @map("actual_end_at")
+  assignedUserId          String?  @map("assigned_user_id")
+  assignedEntityType      TipoEntitaAssegnataEnum? @map("assigned_entity_type")
+  assignedDepartmentId    String?  @map("assigned_department_id")
+  assignedExternalCompanyId String? @map("assigned_external_company_id")
+  blockReason             String?  @map("block_reason")
+  suspendReason           String?  @map("suspend_reason")
+  notes                   String?
+  createdAt               DateTime @default(now()) @map("created_at")
+  updatedAt               DateTime @updatedAt @map("updated_at")
+
+  order             Order            @relation(fields: [orderId], references: [id])
+  department        Department       @relation(fields: [departmentId], references: [id])
+  assignedUser      User?            @relation("PhaseAssignedUser", fields: [assignedUserId], references: [id])
+  externalCompany   ExternalCompany? @relation(fields: [assignedExternalCompanyId], references: [id])
+  workItems         WorkItem[]
+  attachments       Attachment[]
+  checklistResults  ChecklistResult[]
+
+  @@map("order_phases")
+}
+
+enum StatoFaseEnum {
+  NON_PREVISTA
+  DA_ATTIVARE
+  IN_ATTESA
+  PRONTA
+  IN_LAVORAZIONE
+  SOSPESA
+  BLOCCATA
+  COMPLETATA
+  ANNULLATA
+}
+
+enum TipoEntitaAssegnataEnum {
+  INTERNO
+  ESTERNO
+}
+
+model WorkItem {
+  id                   String   @id @default(uuid())
+  orderId              String   @map("order_id")
+  phaseId              String?  @map("phase_id")
+  itemType             TipoLavorazioneEnum @map("item_type")
+  title                String
+  description          String?
+  status               StatoLavorazioneEnum @default(DA_FARE)
+  priority             PrioritaEnum @default(MEDIA)
+  blockingFlag         Boolean  @default(false) @map("blocking_flag")
+  deferrableFlag       Boolean  @default(false) @map("deferrable_flag")
+  deliveryConstraint   VincoloConsegnaEnum? @map("delivery_constraint")
+  needsPartsFlag       Boolean  @default(false) @map("needs_parts_flag")
+  assignedUserId       String?  @map("assigned_user_id")
+  assignedExternalCompanyId String? @map("assigned_external_company_id")
+  plannedDate          DateTime? @map("planned_date")
+  actualStartAt        DateTime? @map("actual_start_at")
+  actualEndAt          DateTime? @map("actual_end_at")
+  blockReason          String?  @map("block_reason")
+  suspendReason        String?  @map("suspend_reason")
+  notes                String?
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  order           Order            @relation(fields: [orderId], references: [id])
+  phase           OrderPhase?      @relation(fields: [phaseId], references: [id])
+  externalCompany ExternalCompany? @relation(fields: [assignedExternalCompanyId], references: [id])
+  attachments     Attachment[]
+
+  @@map("work_items")
+}
+
+enum TipoLavorazioneEnum {
+  CARROZZERIA
+  OFFICINA
+  LAVORI_TERZI
+  PREPARAZIONE
+  GARANZIA
+  ALTRO
+}
+
+enum StatoLavorazioneEnum {
+  DA_FARE
+  IN_CORSO
+  SOSPESO
+  BLOCCATO
+  FATTO
+  ANNULLATO
+}
+
+enum VincoloConsegnaEnum {
+  OBBLIGATORIA_PRIMA_CONSEGNA
+  PREFERIBILE_PRIMA_CONSEGNA
+  RINVIABILE
+  NON_VINCOLANTE
+}
+
+model Accessory {
+  id                  String   @id @default(uuid())
+  orderId             String   @map("order_id")
+  phaseId             String?  @map("phase_id")
+  name                String
+  description         String?
+  salePrice           Decimal? @map("sale_price") @db.Decimal(10, 2)
+  purchasePrice       Decimal? @map("purchase_price") @db.Decimal(10, 2)
+  supplierName        String?  @map("supplier_name")
+  expectedArrivalDate DateTime? @map("expected_arrival_date")
+  arrivedAt           DateTime? @map("arrived_at")
+  installedAt         DateTime? @map("installed_at")
+  status              StatoAccessorioEnum @default(DA_ORDINARE)
+  blockingForDelivery Boolean  @default(false) @map("blocking_for_delivery")
+  orderedBy           String?  @map("ordered_by")
+  notes               String?
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  order       Order       @relation(fields: [orderId], references: [id])
+  attachments Attachment[]
+
+  @@map("accessories")
+}
+
+enum StatoAccessorioEnum {
+  DA_ORDINARE
+  ORDINATO
+  IN_ATTESA_ARRIVO
+  ARRIVATO
+  INSTALLAZIONE_PREVISTA
+  INSTALLATO
+  COMPLETATO
+  SOSPESO
+  ANNULLATO
+}
+
+model Appointment {
+  id               String   @id @default(uuid())
+  orderId          String   @map("order_id")
+  phaseId          String?  @map("phase_id")
+  customerId       String?  @map("customer_id")
+  appointmentDate  DateTime @map("appointment_date") @db.Date
+  appointmentTime  DateTime? @map("appointment_time") @db.Time
+  appointmentType  TipoAppuntamentoEnum @default(FLESSIBILE) @map("appointment_type")
+  customerPresent  Boolean  @default(false) @map("customer_present")
+  status           StatoAppuntamentoEnum @default(PROGRAMMATO)
+  notes            String?
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  order    Order     @relation(fields: [orderId], references: [id])
+  customer Customer? @relation(fields: [customerId], references: [id])
+
+  @@map("appointments")
+}
+
+enum TipoAppuntamentoEnum {
+  VINCOLANTE
+  FLESSIBILE
+}
+
+enum StatoAppuntamentoEnum {
+  PROGRAMMATO
+  ARRIVATO
+  IN_LAVORAZIONE
+  COMPLETATO
+  NO_SHOW
+  ANNULLATO
+}
+
+model Attachment {
+  id               String   @id @default(uuid())
+  orderId          String   @map("order_id")
+  phaseId          String?  @map("phase_id")
+  workItemId       String?  @map("work_item_id")
+  accessoryId      String?  @map("accessory_id")
+  attachmentType   TipoAllegatoEnum @map("attachment_type")
+  category         String
+  fileName         String   @map("file_name")
+  originalFileName String   @map("original_file_name")
+  storageUrl       String   @map("storage_url")
+  mimeType         String   @map("mime_type")
+  sizeBytes        Int      @map("size_bytes")
+  visibilityScope  ScopeVisibilitaEnum @map("visibility_scope") @default(SOLO_INTERNO)
+  externalCompanyId String? @map("external_company_id")
+  description      String?
+  uploadedBy       String   @map("uploaded_by")
+  uploadedAt       DateTime @default(now()) @map("uploaded_at")
+  isDeleted        Boolean  @default(false) @map("is_deleted")
+  deletedBy        String?  @map("deleted_by")
+  deletedAt        DateTime? @map("deleted_at")
+
+  order     Order       @relation(fields: [orderId], references: [id])
+  phase     OrderPhase? @relation(fields: [phaseId], references: [id])
+  workItem  WorkItem?   @relation(fields: [workItemId], references: [id])
+  accessory Accessory?  @relation(fields: [accessoryId], references: [id])
+
+  @@map("attachments")
+}
+
+enum TipoAllegatoEnum {
+  FOTO
+  DOCUMENTO
+  PREVENTIVO
+  TECNICO
+  ALTRO
+}
+
+enum ScopeVisibilitaEnum {
+  SOLO_INTERNO
+  INTERNO_REPARTO
+  SPECIFICO_ESTERNO
+  SOLO_ADMIN
+}
+
+model Checklist {
+  id           String   @id @default(uuid())
+  name         String
+  departmentId String   @map("department_id")
+  orderType    TipoOrdineEnum? @map("order_type")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  department Department       @relation(fields: [departmentId], references: [id])
+  items      ChecklistItem[]
+
+  @@map("checklists")
+}
+
+model ChecklistItem {
+  id                  String   @id @default(uuid())
+  checklistId         String   @map("checklist_id")
+  description         String
+  inputType           TipoInputChecklistEnum @map("input_type")
+  isRequired          Boolean  @default(false) @map("is_required")
+  requiresAttachment  Boolean  @default(false) @map("requires_attachment")
+  requiresNote        Boolean  @default(false) @map("requires_note")
+  visibilityScope     ScopeVisibilitaEnum @default(SOLO_INTERNO) @map("visibility_scope")
+  sortOrder           Int      @map("sort_order")
+
+  checklist Checklist         @relation(fields: [checklistId], references: [id])
+  results   ChecklistResult[]
+
+  @@map("checklist_items")
+}
+
+enum TipoInputChecklistEnum {
+  CHECKBOX
+  TEXT
+  NUMBER
+  YES_NO
+  ATTACHMENT
+}
+
+model ChecklistResult {
+  id              String   @id @default(uuid())
+  checklistItemId String   @map("checklist_item_id")
+  orderId         String   @map("order_id")
+  phaseId         String   @map("phase_id")
+  value           String?
+  attachmentId    String?  @map("attachment_id")
+  note            String?
+  completedBy     String   @map("completed_by")
+  completedAt     DateTime @default(now()) @map("completed_at")
+
+  checklistItem ChecklistItem @relation(fields: [checklistItemId], references: [id])
+  phase         OrderPhase    @relation(fields: [phaseId], references: [id])
+
+  @@map("checklist_results")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  type      TipoNotificaEnum
+  priority  PrioritaNotificaEnum @default(INFORMATIVA)
+  title     String
+  message   String
+  orderId   String?  @map("order_id")
+  phaseId   String?  @map("phase_id")
+  readAt    DateTime? @map("read_at")
+  isRead    Boolean  @default(false) @map("is_read")
+  actionUrl String?  @map("action_url")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user  User   @relation(fields: [userId], references: [id])
+  order Order? @relation(fields: [orderId], references: [id])
+
+  @@map("notifications")
+}
+
+enum TipoNotificaEnum {
+  NUOVO_ORDINE
+  CAMBIO_STATO
+  FASE_PRONTA
+  FASE_COMPLETATA
+  BLOCCO
+  SOSPENSIONE
+  ACCESSORIO
+  RITARDO
+  ORDINE_PRONTO
+  ALTRO
+}
+
+enum PrioritaNotificaEnum {
+  INFORMATIVA
+  ATTENZIONE
+  CRITICA
+  URGENTE
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  entityType  String   @map("entity_type")
+  entityId    String   @map("entity_id")
+  action      AzioneAuditEnum
+  userId      String   @map("user_id")
+  beforeData  Json?    @map("before_data")
+  afterData   Json?    @map("after_data")
+  reason      String?
+  ipAddress   String?  @map("ip_address")
+  userAgent   String?  @map("user_agent")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user  User   @relation(fields: [userId], references: [id])
+  order Order? @relation(fields: [entityId], references: [id])
+
+  @@map("audit_logs")
+}
+
+enum AzioneAuditEnum {
+  CREAZIONE
+  MODIFICA
+  CANCELLAZIONE
+  CAMBIO_STATO
+  SBLOCCO
+  OVERRIDE
+  LOGIN
+  CONFIGURAZIONE
+}
