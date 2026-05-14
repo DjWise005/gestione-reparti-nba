@@ -1,5 +1,5 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
-import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
@@ -24,15 +24,17 @@ export default async function DashboardPage() {
             </p>
           </div>
           
-          {/* Logout usando UserButton di Clerk */}
-          <form action="/api/auth/signout" method="POST">
-            <button 
-              type="submit"
-              className="rounded-lg bg-red-600 px-6 py-2 text-white hover:bg-red-700 cursor-pointer"
-            >
-              Logout
-            </button>
-          </form>
+          {/* UserButton Clerk con logout integrato */}
+          <div className="flex items-center gap-4">
+            <UserButton 
+              afterSignOutUrl="/"
+              appearance={{
+                elements: {
+                  avatarBox: "w-10 h-10"
+                }
+              }}
+            />
+          </div>
         </div>
 
         {/* Card informazioni */}
